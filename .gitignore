@@ -1,0 +1,4 @@
+.DS_Store
+*.py[cod]
+pip-log.txt
+pip-delete-this-directory.txt
