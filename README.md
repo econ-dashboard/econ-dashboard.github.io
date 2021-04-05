@@ -8,41 +8,10 @@ A project for Stanford's COMM 277T course.
 
 [project home page]: https://github.com/stanfordjournalism/cookiecutter-stanford-progj#requirements--setup
 
-After creating this project:
+After creating this project, if using Python:
 
 * `cd bna-econ-n-metrics`
 * `pipenv install`
-
-## Save and push your work
-
-This project includes a few command-line tasks that help
-with the daily workflow of our course. The tasks were created using [invoke][], a task execution library.
-
-Below are the most import commands:
-
-```
-invoke --list
-Available tasks:
-
-  code.push   Saves local work and pushes changes to GitHub
-  code.save   Saves changes locally (in git)
-```
-
-After creating or modifying files in your text editor of choice,
-you should use these tasks to save your changes locally and push them to GitHub.
-
-> It's good to get in the habit of running these commands whenever you wrap up a coding session.
-
-```
-cd bna-econ-n-metrics
-
-# Activate the virtual environment
-pipenv shell
-
-# Save the work and push to GitHub
-invoke code.save
-invoke code.push
-```
 
 ## Installing Python libraries
 
