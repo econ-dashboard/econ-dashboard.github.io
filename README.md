@@ -2,6 +2,13 @@
 
 A project for Stanford's COMM 277T course.
 
+# SMART Goals
+
+## Rachel
+
+By the last week of the quarter, I will produce a user-friendly website that has a landing page with a search bar, and a detail  page with a nav bar/tabs and interactive data visualizations. This dashboard/web application will serve as a tool for local reporters to understand their area’s economic health. I hope to gain some skills in data gathering/wranging, but I hope to mostly focus on creating interactive data visualization and designing/developing a UX-friendly website (even if it’s simple). 
+
+
 ## Setup
 
 > Before using this project, please ensure all dependencies are installed. See the [project home page][] for details.
