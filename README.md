@@ -2,12 +2,19 @@
 
 A project for Stanford's COMM 277T course.
 
-# SMART Goals
+## SMART Goals
 
-## Rachel
+### Rachel
 
-By the last week of the quarter, I will produce a user-friendly website that has a landing page with a search bar, and a detail  page with a nav bar/tabs and interactive data visualizations. This dashboard/web application will serve as a tool for local reporters to understand their area’s economic health. I hope to gain some skills in data gathering/wranging, but I hope to mostly focus on creating interactive data visualization and designing/developing a UX-friendly website (even if it’s simple). 
+By the last week of the quarter, I will produce a user-friendly website that has a landing page with a search bar, and a detail  page with a nav bar/tabs and interactive data visualizations. This dashboard/web application will serve as a tool for local reporters to understand their area’s economic health. I hope to gain some skills in data gathering/wrangling, but I hope to mostly focus on creating interactive data visualization and designing/developing a UX-friendly website (even if it’s simple).
 
+### Michael
+By the last week of the quarter, I will support development of a user-friendly website and produce at least two static charts and two interactive data visualizations within this website by sourcing and analyzing relevant local-economic data. The backend analysis, data-sourcing and data visualizations will help feed into my team's interactive website/dashboard, which is meant to support local journalists in understanding their area's economic health. In achieving this goal, I hope to learn and develop basic front-end and back-end data-storytelling skills, which will ultimately help me better communicate data to a wider audience.
+
+Key skills I hope to develop include:
+- HTML
+- CSS
+- Javascript
 
 ## Setup
 
@@ -31,7 +38,7 @@ and data analysis:
 * APIs and web scraping - [requests][], [BeautifulSoup][], [selenium][]
 * data analysis - [jupyter][], [pandas][], [matplotlib][]
 
-The standard workflow is:
+The standard workflow when using python is:
 
 ```
 cd bna-econ-n-metrics
@@ -54,8 +61,7 @@ Below is an overview of the project structure:
 │   ├── __init__.py
 │   └── utils.py
 ├── notebooks (Jupyter notebooks)
-├── scripts (Number-prefixed data processing scripts)
-│   └── 1-etl.py
+├── scripts
 └── tasks (invoke task definitions)
     ├── __init__.py
     └── code.py
