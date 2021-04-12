@@ -2,6 +2,9 @@
 
 A project for Stanford's COMM 277T course.
 
+## Scrum Meetings
+Scrum meetings are held daily from 4PM-4:15PM PST.
+
 ## SMART Goals
 
 ### Rachel
