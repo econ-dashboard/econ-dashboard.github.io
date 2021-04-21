@@ -30,18 +30,11 @@ After creating this project, if using Python:
 * `cd bna-econ-n-metrics`
 * `pipenv install`
 
+To run Python, it's recommended to do so in the virtual shell. Start with:
+
+* 'pipenv shell'
+
 ## Installing Python libraries
-
-Depending on the type of project you're working on,
-you may want to install additional Python packages.
-Below are some useful libraries for common tasks
-such as interacting with APIs, scraping web pages,
-and data analysis:
-
-* APIs and web scraping - [requests][], [BeautifulSoup][], [selenium][]
-* data analysis - [jupyter][], [pandas][], [matplotlib][]
-
-The standard workflow when using python is:
 
 ```
 cd bna-econ-n-metrics
@@ -51,7 +44,7 @@ pipenv install requests beautifulsoup4
 
 ## Files & Directories
 
-Below is an overview of the project structure:
+Below is an overview of the project structure. It is subject to change as the project develops, but will be updated regularly:
 
 ```   
 ├── Pipfile
@@ -59,16 +52,24 @@ Below is an overview of the project structure:
 ├── README.md
 ├── data
 │   ├── processed (Raw data that has been transformed)
-│   └── raw  (Copy of original source data)
+│   └── raw (Copy of original source data)
 ├── lib (Re-usable Python code in .py files)
 │   ├── __init__.py
 │   └── utils.py
 ├── notebooks (Jupyter notebooks)
 ├── scripts
-└── tasks (invoke task definitions)
+│   ├── analysis (Analyze data for templating)
+│   ├── data_wrangling (Source and clean data for analysis)
+│   ├── templates (html templates to be used in Jinja rendering)
+├── site
+│   ├── county-data (HTML files for each county)
+│   └── static
+│       ├── CSS
+│       └── JS
+└── tasks (Invoke task definitions)
     ├── __init__.py
     └── code.py
-        
+
 ```
 
 ## Reference
