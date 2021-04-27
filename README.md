@@ -2,6 +2,26 @@
 
 A project for Stanford's COMM 277T course.
 
+## Usage
+
+To run the website for development, navigate to the `site/` directory
+and fire up a python web server:
+
+```
+cd site
+python -m http.server
+```
+
+Then go to http://localhost:8000 and navigate to appropriate page(s).
+
+> It's important to use the web server because using any external JS
+> requires serving the data in the same way as you would in a production
+> setting on the web. If you try to access the HTML file using your
+> browser with the `file://` scheme (i.e. without the web server),
+> you will get Cross-Origin (aka CORS) errors when trying to access
+> "local" JSON files.
+
+
 ## Scrum Meetings
 Scrum meetings are held daily from 4PM-4:15PM PST.
 

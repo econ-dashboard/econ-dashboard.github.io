@@ -4,7 +4,7 @@
     <head>
         <meta charset='UTF-8 /'>
         <title> Econ dashboard detail page </title>
-        <link rel='stylesheet' href='css/detail-style.css' />
+        <link rel='stylesheet' href='static/css/detail-style.css' />
 
         <!-- vega embed-->
         <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
@@ -32,11 +32,12 @@
                         <div class='data-descript'>
                             <p>Santa Clara County had 75035 establishments in 2020 Q1.</p>
                         </div>
+                        <div id='vis'></div>
                         <div class='data-viz'>
                             <script>
                                 var v1Spec = {
                                     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-                                    "data": {"url": '../county-data/sample-scc-2020q123-data.csv'},
+                                    "data": {"url": 'county-data/sample-scc-2020q123-data.csv'},
                                     "mark": "bar",
                                     "encoding": {
                                         "x": {"field": "quarter", "type": "quantitative"},
