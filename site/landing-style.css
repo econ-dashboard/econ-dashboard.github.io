@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* height: 100vh; */
+    margin: 0;
+    font: 500 100% system-ui, sans-serif;
+}
+
+.page-container {
+    background: white;
+    /* height: calc(100vh - 10px); */
+    display: grid;
+    /* grid-template-columns: 100px auto 100px; */
+    grid-template-rows: min-content auto min-content;
+    /* > * {
+        padding: 1rem;
+        text-align: center;
+    } */
+}
+
+.page-header {
+    grid-column: 1 / 4;
+    padding: 10px;
+    text-align: center;
+    align-self: center;
+    background: #ffecb3;
+    display: grid;
+    /* border-bottom: 1px solid grey; */
+}
