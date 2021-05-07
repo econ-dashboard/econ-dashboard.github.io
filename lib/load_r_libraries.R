@@ -10,10 +10,17 @@
 # machines.
 ################################################################################
 
-# For each line below, we check to see if the relevant library is already
+# For each package below, we check to see if the relevant library is already
 # installed. If so, we load it, if not, we install it, then load it.
-if (!require(tidyverse)) install.packages("tidyverse")
-library(tidyverse)
+our_packages <- 
+	c(
+		"whisker",
+		"tidyverse"
+	)
 
-if (!require(whisker)) install.packages("whisker")
-library(whisker)
+for (package in our_packages) {
+	if (!require(package, character.only = TRUE)) {
+		install.packages(package)
+		library(package, character.only = TRUE)
+	}
+}
