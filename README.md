@@ -4,6 +4,19 @@ A project for Stanford's COMM 277T course.
 
 ## Usage
 
+#### Data Pipeline
+
+To run the data pipeline, from within the root folder, run:
+
+```
+Rscript scripts/run_data_pipeline.R 
+```
+
+This should populate all relevant data and HTML files for the website. Current
+runtime is fairly quick (~30 seconds), but we'll monitor as the data grows.
+
+#### Website Dev
+
 To run the website for development, navigate to the `site/` directory
 and fire up a python web server:
 
@@ -20,7 +33,6 @@ Then go to http://localhost:8000 and navigate to appropriate page(s).
 > browser with the `file://` scheme (i.e. without the web server),
 > you will get Cross-Origin (aka CORS) errors when trying to access
 > "local" JSON files.
-
 
 ## Scrum Meetings
 Scrum meetings are held daily from 4PM-4:15PM PST.
@@ -39,29 +51,6 @@ Key skills I hope to develop include:
 - CSS
 - Javascript
 
-## Setup
-
-> Before using this project, please ensure all dependencies are installed. See the [project home page][] for details.
-
-[project home page]: https://github.com/stanfordjournalism/cookiecutter-stanford-progj#requirements--setup
-
-After creating this project, if using Python:
-
-* `cd bna-econ-n-metrics`
-* `pipenv install`
-
-To run Python, it's recommended to do so in the virtual shell. Start with:
-
-* 'pipenv shell'
-
-## Installing Python libraries
-
-```
-cd bna-econ-n-metrics
-# Install one or libraries, e.g. requests and BeautifulSoup
-pipenv install requests beautifulsoup4
-```
-
 ## Files & Directories
 
 Below is an overview of the project structure. It is subject to change as the project develops, but will be updated regularly:
@@ -69,20 +58,24 @@ Below is an overview of the project structure. It is subject to change as the pr
 ```   
 ├── Pipfile
 ├── Pipfile.lock
+├── .Rhistory
+├── bna-econ-n-metrics.Rproj
 ├── README.md
 ├── data
 │   ├── processed (Raw data that has been transformed)
-│   └── raw (Copy of original source data)
-├── lib (Re-usable Python code in .py files)
+│   └── raw (Copy of original source data when neccessary)
+├── lib (Re-usable Python or R code in .py or .R files)
 │   ├── __init__.py
+│   ├──  load_r_libraries.py
 │   └── utils.py
-├── notebooks (Jupyter notebooks)
+├── notebooks (Jupyter notebooks or Rmarkdown files if neccessary to share)
 ├── scripts
 │   ├── analysis (Analyze data for templating)
 │   ├── data_wrangling (Source and clean data for analysis)
-│   ├── templates (html templates to be used in Jinja rendering)
+│   ├── templates (HTML template/script to be used in Whisker rendering)
 ├── site
-│   ├── county-data (HTML files for each county)
+│   ├── county-pages (HTML files for each county)
+│   ├── county-data (data files for each county)
 │   └── static
 │       ├── CSS
 │       └── JS
