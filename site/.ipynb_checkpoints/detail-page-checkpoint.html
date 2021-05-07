@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset='UTF-8 /'>
+        <title> Econ dashboard detail page </title>
+        <link rel='stylesheet' href='static/css/detail-style.css' />
+
+        <!-- vega embed-->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    </head>
+
+    <body>
+        <div class='page-container'>
+            <header class='page-header'>
+                <div class='home'><a href="">Home</a></div>
+                <div class='county-name'><h1 class="county-name">Santa Clara County, California</h1></div>
+            </header>
+
+            <nav class='page-nav'>
+                <div class='category-nav'><a href="#business">Business</a></div>
+                <div class='category-nav'><a href="#housing">Housing</a></div>
+                <div class='category-nav'><a href="#unemployment">Unemployment</a></div>
+            </nav>
+
+            <main class='page-main'>
+                <div class='category-section'>
+                    <div class='category-heading' id='business'><h2>Business</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>
+                            <p>Santa Clara County had 75035 establishments in 2020 Q1.</p>
+                        </div>
+                        <div id='vis'></div>
+                        <div class='data-viz'>
+                            <script>
+                                var v1Spec = {
+                                    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                    "data": {"url": 'county-data/sample-scc-2020q123-data.csv'},
+                                    "mark": "bar",
+                                    "encoding": {
+                                        "x": {"field": "quarter", "type": "quantitative"},
+                                        "y": {"field": "qtrly_estabs_count", "type": "quantitative"},
+                                        }
+                                    };
+                                vegaEmbed('#vis', v1Spec);
+                            </script>
+                            <!-- <div class="flourish-embed flourish-chart" data-src="visualisation/5970522"><script src="https://public.flourish.studio/resources/embed.js"></script></div> -->
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class='category-section'>
+                    <div class='category-heading' id='housing'><h2>Housing</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>Description</div>
+                        <div class='data-viz'>Visualization</div>
+                    </div>
+                </div>
+                <br />
+                <div class='category-section'>
+                    <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>Description</div>
+                        <div class='data-viz'>Visualization</div>
+                    </div>
+                </div>
+            </main>
+            <!-- <aside class='page-sidebar'>
+                Aside
+            </aside> -->
+            <footer class='page-footer'>
+                Footer
+            </footer>
+        </div>
+    </body>
+</html>

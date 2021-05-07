@@ -2,3 +2,11 @@
 *.py[cod]
 pip-log.txt
 pip-delete-this-directory.txt
+.Rproj.user
+*.Rmd
+*.ipynb
+*.zip
+data/raw/lau/
+data/raw/qcew/
+data/processed/
+site/county-pages/
