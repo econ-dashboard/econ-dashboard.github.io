@@ -73,8 +73,10 @@ cty_fips_mappings <-
 			str_remove_all(",") %>% 
 			str_to_lower() %>% 
 			str_replace_all(" |/", "-"),
+		county_page_filepath = 
+			paste0("site/county-pages/", area_formatted, "-", fips_code, ".html"),
 		county_page_url = 
-			paste0("site/county-pages/", area_formatted, "-", fips_code, ".html")
+			paste0("/county-pages/", area_formatted, "-", fips_code, ".html")
 	) %>% 
 	arrange("fips_code")
 
@@ -82,4 +84,25 @@ cty_fips_mappings <-
 # folder.
 cty_fips_mappings %>% write_csv(cty_fips_path_out)
 
-print("County-FIPS code mappings pulled and processed. Data is stored in data/processed/reference_data/.")
+# Selects data columns relevant to Javascript search function.
+cty_fips_mappings_json <- 
+	cty_fips_mappings %>% 
+	select(area, county_page_url)
+
+# Transforms relevant columns from R dataframe to JSON list.
+json_for_search <- 
+	rjson::toJSON(
+		unname(
+			split(cty_fips_mappings_json, 1:nrow(cty_fips_mappings_json))
+		)
+	)
+
+# Writes JSON for JS search to relevant file path.
+writeLines(
+	json_for_search,
+	"site/county-data/json/json_for_search.json"
+)
+
+print("County-FIPS code mappings pulled and processed.")
+print("County data is stored in data/processed/reference_data/.")
+print("JSON data for JS search function is stored at site/county-data/json/json_for_search.json.")
