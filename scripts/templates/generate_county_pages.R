@@ -36,7 +36,7 @@ for (record in 1:nrow(data_county_names)) {
 
 	writeLines(
 		whisker.render(template, template_data),
-		data_county_names[record, "county_page_url"] %>% pull()
+		data_county_names[record, "county_page_filepath"] %>% pull()
 	)
 }
 
