@@ -14,6 +14,7 @@
 # installed. If so, we load it, if not, we install it, then load it.
 our_packages <- 
 	c(
+		"tictoc",
 		"whisker",
 		"tidyverse"
 	)

@@ -1,88 +1,73 @@
 ################################################################################
 # Authors: Rachel Oh, Michael Spencer
 # Project: BNA-ECON-N-METRICS
-# Script Purpose: Gather and process the county FIPS mappings from the Census. 
-# The script generates a csv for all available counties, and for each county,
+# Script Purpose: Gather and process the county FIPS mappings from the BLS. 
+# The script generates a CSV for all available counties, and for each county,
 # provides the FIPS code, name of the area, and the file path/URL for the county's
 # HTML page.
-# Notes: Pulls the 2019 FIPS codes for all states, counties, minor divisions, and
-# incorporated places via a URL. A copy of this data is also stored locally should
-# the URL ever fail to work.
+# Notes: Pulls the 2020 FIPS codes for counties or equivalent entities via a URL. 
+# A copy of this data is also stored locally should the URL ever fail to work.
 ################################################################################
 
-if (!running_pipeline) source("lib/load_r_libraries.R")
+if (!exists("running_pipeline")) source("lib/load_r_libraries.R")
 
-print("Pulling county-FIPS code mappings data...")
+# Start timer
+tic("FIPS data scrape")
+
+writeLines("")
+writeLines("Pulling county-FIPS code mappings data...")
 
 # Saves the data source URL and output location to variables.
-cty_fips_url_in <- "https://www2.census.gov/programs-surveys/popest/geographies/2019/all-geocodes-v2019.xlsx"
+cty_fips_url_in <- "https://www.bls.gov/lau/laucnty16.xlsx"
 cty_fips_path_out <- "data/processed/reference_data/county_fips_mappings.csv"
 
-# Reads in the source XLSX (Excel) file from the URL, skipping the first four
-# lines since they are simply descriptive info.
-data_raw_fips_mappings <- 
+cty_fips_mappings <-
+	# Reads in the source XLSX (Excel) file from the URL, skipping the first 7
+	# lines since they are simply descriptive info. Also only takes in the relevant
+	# columns needed for this script.
 	openxlsx::read.xlsx(
 		cty_fips_url_in, 
-		startRow = 4, 
-		sep.names= " "
-	)
-
-# Generates a dataframe from the raw data that includes each state and its 2-digit
-# FIPS code.
-state_fips_mappings <-
-	data_raw_fips_mappings %>% 
-	filter(`Summary Level` == "040") %>% 
-	select(
-		state_fips = `State Code (FIPS)`,
-		state = `Area Name (including legal/statistical area description)`
-	)
-
-# Generates a dataframe containing the cleaned and processed county FIPS mappings.
-cty_fips_mappings <- 
-	data_raw_fips_mappings %>%
-	
-	# Filters the raw data to just the records which are for counties or
-	# county-equivalent geographies (i.e. boroughs in Alaska or parishes in
-	# Louisiana). Checks to make sure that the designation is at the end of the
-	# string (i.e. would exclude "Parish City").
-	filter(
-		str_detect(
-			`Area Name (including legal/statistical area description)`,
-			"County$|Borough$|Parish$"
-		)
+		startRow = 7, 
+		colNames = F,
+		cols = 2:4
 	) %>% 
-	rename(state_fips = `State Code (FIPS)`) %>% 
-	
-	# Joins the county-level data to the state data for construction of unique 
-	# FIPS codes, names, and file paths.
-	left_join(state_fips_mappings, by = "state_fips") %>% 
-	transmute(
-		
+	rename(
+		state_fips = X1,
+		cty_fips = X2,
+		area = X3
+	) %>% 
+	mutate(
+		# Extracts the county name and state abbreviation from the area.
+		county = str_extract(area, ".*(?=,)"),
+		state = str_extract(area, "(?<=,\\s).*"),
 		# Constructs the 5 digit county-specific FIPS codes.
-		fips_code = str_c(state_fips, `County Code (FIPS)`),
-		county = `Area Name (including legal/statistical area description)`,
-		state,
-		
-		# Constructs the display name for each area.
-		area = str_c(county, ", ", state),
-		
-		# Constructs the file path/URL for each area.
-		# TO-DO: May consider making this URL just the unique FIPS code.
+		fips_code = str_c(state_fips, cty_fips),
 		area_formatted = 
 			area %>% 
 			str_remove_all(",") %>% 
 			str_to_lower() %>% 
 			str_replace_all(" |/", "-"),
-		county_page_filepath = 
-			paste0("site/county-pages/", area_formatted, "-", fips_code, ".html"),
+		# Constructs the file path/URL for each area.
+		# TO-DO: May consider making this URL just the unique FIPS code.
 		county_page_url = 
-			paste0("/county-pages/", area_formatted, "-", fips_code, ".html")
-	) %>% 
-	arrange("fips_code")
+			paste0("/county-pages/", area_formatted, "-", fips_code, ".html"),
+		county_page_filepath = 
+			paste0("site", county_page_url)
+	)
 
-# Writes the processed data to a csv file in the `data/processed/reference_data`
+# Writes the processed data to a CSV file in the `data/processed/reference_data`
 # folder.
 cty_fips_mappings %>% write_csv(cty_fips_path_out)
+
+# Pulls the available FIPS/counties that we have and uses them to filter data
+# throughout the pipeline.
+available_fips <- cty_fips_mappings %>% pull(fips_code)
+
+writeLines(paste0("Creating unique data folders for ", length(available_fips), " available counties within site/county-data/counties/..."))
+
+for (fips_code in available_fips) {
+	dir.create(str_c("site/county-data/counties/", fips_code), showWarnings = F)
+}
 
 # Selects data columns relevant to Javascript search function.
 cty_fips_mappings_json <- 
@@ -103,6 +88,12 @@ writeLines(
 	"site/county-data/json/json_for_search.json"
 )
 
-print("County-FIPS code mappings pulled and processed.")
-print("County data is stored in data/processed/reference_data/.")
-print("JSON data for JS search function is stored at site/county-data/json/json_for_search.json.")
+rm(cty_fips_mappings, cty_fips_mappings_json, cty_fips_path_out, cty_fips_url_in)
+
+writeLines("County-FIPS code mappings pulled and processed.")
+writeLines("County data is stored in data/processed/reference_data/.")
+writeLines("JSON data for JS search function is stored at site/county-data/json/json_for_search.json.")
+
+# End timer
+toc()
+writeLines("")
