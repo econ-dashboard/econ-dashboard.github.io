@@ -15,4 +15,5 @@ source("lib/load_r_libraries.R")
 running_pipeline <- TRUE
 
 source("scripts/data_wrangling/pull_cty_fips_mappings.R")
+source("scripts/data_wrangling/pull_lau_data.R")
 source("scripts/templates/generate_county_pages.R")

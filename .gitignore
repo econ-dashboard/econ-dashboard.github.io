@@ -10,4 +10,5 @@ data/raw/lau/
 data/raw/qcew/
 data/processed/
 site/county-pages/
+site/county-data/
 site/county-data/json/json_for_search.json
