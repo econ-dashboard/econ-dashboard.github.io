@@ -39,7 +39,7 @@ data_lau <-
 for (year in available_years) {
 	
 	data_lau <-
-		openxlsx::read.xlsx(
+		read.xlsx(
 			str_c(lau_data_url_in, year, ".xlsx"), 
 			startRow = 7, 
 			colNames = F,

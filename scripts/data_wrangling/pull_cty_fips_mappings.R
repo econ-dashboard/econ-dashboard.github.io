@@ -25,7 +25,7 @@ cty_fips_mappings <-
 	# Reads in the source XLSX (Excel) file from the URL, skipping the first 7
 	# lines since they are simply descriptive info. Also only takes in the relevant
 	# columns needed for this script.
-	openxlsx::read.xlsx(
+	read.xlsx(
 		cty_fips_url_in, 
 		startRow = 7, 
 		colNames = F,
@@ -76,7 +76,7 @@ cty_fips_mappings_json <-
 
 # Transforms relevant columns from R dataframe to JSON list.
 json_for_search <- 
-	rjson::toJSON(
+	toJSON(
 		unname(
 			split(cty_fips_mappings_json, 1:nrow(cty_fips_mappings_json))
 		)
