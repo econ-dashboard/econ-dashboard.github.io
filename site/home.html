@@ -1,57 +1,142 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8 /" />
+    <title>Econ dashboard landing page</title>
+    <link rel="stylesheet" href="static/css/landing-style.css" />
+  </head>
 
-    <head>
-        <meta charset='UTF-8 /'>
-        <title> Econ dashboard landing page </title>
-        <link rel='stylesheet' href='static/css/landing-style.css' />
-        <!-- <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script> -->
-
-    </head>
-
-    <body>
-        <div class='page-container'>
-            <header class='page-header'>
-                <p>Local Economy Indicator</p>
-            </header>
-        </div>
-        <div class='search-container'>
-            <script type="module">
-                import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.esm.js'
-                const countyNames = [
-                    {
-                        "county": "Santa Clara"
-                    },
-                    {
-                        "county": "Santa Cruz"
-                    },
-                    {
-                        "county": "Marin" 
-                    }
-                ]
-                const options = {
-                    keys: ["county"]
-                };
-
-                const searchInput = document.querySelector("input");
-                const searchInputValue = document.querySelector("input").value;
-
-                function search() {
-                    const fuse = new Fuse(countyNames, options);
-                    const result = fuse.search(searchInputValue);
-                    console.log(result);
-                }
+  <body>
+    <div class="page-container">
+      <header class="page-header">
+        <p>Local Economy Indicator</p>
+      </header>
+    </div>
+    <div class="search-container">
+      <div class="search-content">
+        <input type="text" placeholder="Search county.." />
+        <p class="dropdown"></p>
+        
+      <script type="module">
+        import Fuse from "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.esm.js";
                 
-                searchInput.addEventListener("input", search);
-                search();
+        // function readCSV() {
+        //   const reader = new FileReader();
+        //   console.log(reader.readAsText("county_fips_mappings.csv"));
+          // const csvResult = readFileAsText.result;
+          // console.log(csvResult);
+        // }
 
-            </script>
-            <div class='search-content'>
-                <input type="text" placeholder="Search county.." />
-                <a id="searchResult"></a>
-                <a></a>
-            </div>      
+        fetch("county-data/json/json_for_search.json")
+          .then(response => response.json())
+          .then(data => console.log(data));
 
+        fetch("county-data/json/json_for_search.json")
+          .then(function(u) => response.json())
+          .then(data => console.log(data));
+        const countyNames = [
+          {
+            county: "Santa Clara",
+          },
+          {
+            county: "Santa Cruz",
+          },
+          {
+            county: "Marin",
+          },
+        ];
+
+        const options = {
+          includeScore: true,
+          findAllMatches: true,
+          keys: ["county"],
+        };
+
+        const searchInput = document.querySelector("input");
+        // console.log("search input: ", searchInput);
+
+        searchInput.addEventListener("input", search);
+        // search();
+        
+        function search() {
+          const fuse = new Fuse(countyNames, options);
+          const result = fuse.search(searchInput.value).value;
+          document.querySelector(".dropdown").innerHTML = result;
+        }
+
+      </script>
+        <button type="button" class="collapsible">California</button>
+        <div class="content">
+          <ul>
+            <li>Alameda County</li>
+            <li>Alpine County</li>
+            <li>Amador County</li>
+            <li>Butte County</li>
+            <li>Calaveras County</li>
+            <li>Colusa County</li>
+            <li>Contra Costa County</li>
+            <li>Del Norte County</li>
+            <li>El Dorado County</li>
+            <li>Fresno County</li>
+            <li>Glenn County</li>
+            <li>Humboldt County</li>
+            <li>Imperial County</li>
+            <li>Inyo County</li>
+            <li>Kern County</li>
+            <li>Kings County</li>
+            <li>Lake County</li>
+            <li>Lassen County</li>
+            <li>Los Angeles County</li>
+            <li>Madera County</li>
+            <li>Marin County</li>
+            <li>Mariposa County</li>
+            <li>Mendocino County</li>
+            <li>Merced County</li>
+            <li>Modoc County</li>
+            <li>Mono County</li>
+            <li>Monterey County</li>
+            <li>Napa County</li>
+            <li>Nevada County</li>
+            <li>Orange County</li>
+            <li>Placer County</li>
+            <li>Plumas County</li>
+            <li>Riverside County</li>
+            <li>Sacramento County</li>
+            <li>San Benito County</li>
+            <li>San Bernardino County</li>
+            <li>San Diego County</li>
+            <li>San Francisco County</li>
+            <li>San Joaquin County</li>
+            <li>San Luis Obispo County</li>
+            <li>San Mateo County</li>
+            <li>Santa Barbara County</li>
+            <li>Santa Clara County</li>
+            <li>Santa Cruz County</li>
+            <li>Shasta County</li>
+            <li>Sierra County</li>
+            <li>Siskiyou County</li>
+            <li>Solano County</li>
+            <li>Sonoma County</li>
+            <li>Stanislaus County</li>
+            <li>Sutter County</li>
+            <li>Tehama County</li>
+            <li>Trinity County</li>
+            <li>Tulare County</li>
+            <li>Tuolumne County</li>
+            <li>Ventura County</li>
+            <li>Yolo County</li>
+            <li>Yuba County</li>
+          </ul>
         </div>
-    </body>
+        <button type="button" class="collapsible">State 2</button>
+        <div class="content">
+          <ul>
+            <li>County 1</li>
+            <li>County 2</li>
+          </ul>
+        </div>
+        <script src="static/js/home.js"></script>
+      </div>
+    </div>
+  </body>
 </html>
