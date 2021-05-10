@@ -4,7 +4,9 @@
     <head>
         <meta charset='UTF-8 /'>
         <title> Econ dashboard landing page </title>
-        <link rel='stylesheet' href='landing-style.css' />
+        <link rel='stylesheet' href='static/css/landing-style.css' />
+        <!-- <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script> -->
+
     </head>
 
     <body>
@@ -12,6 +14,44 @@
             <header class='page-header'>
                 <p>Local Economy Indicator</p>
             </header>
+        </div>
+        <div class='search-container'>
+            <script type="module">
+                import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.esm.js'
+                const countyNames = [
+                    {
+                        "county": "Santa Clara"
+                    },
+                    {
+                        "county": "Santa Cruz"
+                    },
+                    {
+                        "county": "Marin" 
+                    }
+                ]
+                const options = {
+                    keys: ["county"]
+                };
+
+                const searchInput = document.querySelector("input");
+                const searchInputValue = document.querySelector("input").value;
+
+                function search() {
+                    const fuse = new Fuse(countyNames, options);
+                    const result = fuse.search(searchInputValue);
+                    console.log(result);
+                }
+                
+                searchInput.addEventListener("input", search);
+                search();
+
+            </script>
+            <div class='search-content'>
+                <input type="text" placeholder="Search county.." />
+                <a id="searchResult"></a>
+                <a></a>
+            </div>      
+
         </div>
     </body>
 </html>
