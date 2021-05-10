@@ -7,17 +7,22 @@
 # data/text which will populate the county page HTML template.
 ################################################################################
 
-if (!running_pipeline) source("lib/load_r_libraries.R")
+if (!exists("running_pipeline")) source("lib/load_r_libraries.R")
 
-print("Generating HTML files for each available county...")
+# Start timer
+tic("HTML page creation")
+
+writeLines("Generating HTML files for each available county...")
 
 # Saves the template and processed county FIPS data file paths to variables.
 template_filepath <- "scripts/templates/template-detail-page.html"
 cty_fips_filepath <- "data/processed/reference_data/county_fips_mappings.csv"
 
-# Reads in the template and county FIPS data.
+# Reads in the template and county FIPS data. The string of c's simply specifies
+# that the columns can all be read in as character columns to avoid a parsing
+# message.
 template <- read_file(template_filepath)
-data_county_names <- read_csv(cty_fips_filepath)
+data_county_names <- read_csv(cty_fips_filepath, col_types = "ccccccccc")
 
 # Iterates through each row in the county FIPS data and pulls the county, state,
 # and constructed file path to output the county page HTML file. Any data that
@@ -31,7 +36,7 @@ for (record in 1:nrow(data_county_names)) {
 	template_data <-
 		list(
 			county_name = data_county_names[record, "county"],
-			state = data_county_names[record, "state"]
+			area = data_county_names[record, "area"]
 		)
 
 	writeLines(
@@ -40,4 +45,8 @@ for (record in 1:nrow(data_county_names)) {
 	)
 }
 
-print("All HTML files generated! HTML files are stored in site/county-pages/.")
+writeLines("All HTML files generated! HTML files are stored in site/county-pages/.")
+
+# End timer
+toc()
+writeLines("")
