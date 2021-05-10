@@ -8,9 +8,7 @@ pip-delete-this-directory.txt
 *.zip
 data/raw/lau/
 data/raw/qcew/
-data/processed/*
-!data/processed/reference_data/.gitkeep
+data/processed/
 site/county-pages/
-site/county-data/*
-!site/county-data/.gitkeep
+site/county-data/
 site/county-data/json/json_for_search.json
