@@ -14,59 +14,63 @@
     </div>
     <div class="search-container">
       <div class="search-content">
-        <input type="text" placeholder="Search county.." />
-        <p class="dropdown"></p>
-        
-      <script type="module">
-        import Fuse from "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.esm.js";
-                
-        // function readCSV() {
-        //   const reader = new FileReader();
-        //   console.log(reader.readAsText("county_fips_mappings.csv"));
-          // const csvResult = readFileAsText.result;
-          // console.log(csvResult);
-        // }
-
-        fetch("county-data/json/json_for_search.json")
-          .then(response => response.json())
-          .then(data => console.log(data));
-
-        fetch("county-data/json/json_for_search.json")
-          .then(function(u) => response.json())
-          .then(data => console.log(data));
-        const countyNames = [
-          {
-            county: "Santa Clara",
-          },
-          {
-            county: "Santa Cruz",
-          },
-          {
-            county: "Marin",
-          },
-        ];
-
-        const options = {
-          includeScore: true,
-          findAllMatches: true,
-          keys: ["county"],
-        };
-
-        const searchInput = document.querySelector("input");
-        // console.log("search input: ", searchInput);
-
-        searchInput.addEventListener("input", search);
-        // search();
-        
-        function search() {
-          const fuse = new Fuse(countyNames, options);
-          const result = fuse.search(searchInput.value).value;
-          document.querySelector(".dropdown").innerHTML = result;
-        }
-
-      </script>
-        <button type="button" class="collapsible">California</button>
+        <!-- <input type="text" placeholder="Search county.." />
+        <p class="dropdown"></p> -->
+        <button type="button" class="collapsible" data-state="AL" id="AL">Alabama</button>
         <div class="content">
+        <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
+
+        
+      <script>          
+        let stateButton = document.querySelector("button");
+        const requestJSON = new Request('county-data/json/json_for_search.json');
+
+        fetch(requestJSON)
+          .then(response => response.json()
+          .then(data => {
+            if (stateButton.dataset.state = "AL") {
+              let listItem = document.createElement('li');
+              let listCounties = "A,B,C"; // list of counties from JSON 
+              listItem.appendChild(listCounties);
+              let = document.getElementById("AL");
+              // let insertedNode = stateButton.insertAfter
+            }
+          }));
+
+
+
+
+
+        stateButton.addEventListener("click", () => {
+          if (stateButton.dataset.state = "AZ") // will become a variable for state key)
+            fetch("county-data/json/json_for_search.json")
+            .then(response => {
+              const responseJSON = response.json();
+              // const parsedJSON = JSON.parse(responseJSON);
+              console.log(responseJSON.typeof);
+            });
+         });
+     
+
+
+          
+          // pseudo coding
+          // if (stateButton.dataset.state = //particular state key) {
+          //   // search for counties that correspond to the specific state in json
+          //   // make a list
+          //   console.log(stateButton.dataset.state);
+          // };
+      </script>
+
+          // <!-- You'll need a script that attaches an event handler
+          // to the list items for the ul of states. The event handler function
+          // can pluck the "data-state" value and use that to pull the list of counties
+          // for the given state and render the counties visually.
+
+          // You'll need to decide on the o 
+          // -->
+
+
           <ul>
             <li>Alameda County</li>
             <li>Alpine County</li>
@@ -135,7 +139,6 @@
             <li>County 2</li>
           </ul>
         </div>
-        <script src="static/js/home.js"></script>
       </div>
     </div>
   </body>
