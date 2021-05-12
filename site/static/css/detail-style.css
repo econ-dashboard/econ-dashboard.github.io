@@ -104,3 +104,10 @@ p {
     padding: 0px;
 }
 
+.source {
+    font-size: small;
+}
+
+.note {
+    font-size: x-small;
+}

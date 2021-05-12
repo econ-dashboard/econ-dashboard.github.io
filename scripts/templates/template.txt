@@ -1,0 +1,5 @@
+In [most recent year and quarter], the number of establishments in [county name] was []. This is a []% change since [1 year ago], when the number was []. 
+
+In [most recent year and quarter], the average weekly wage in [county name] was []. This is a []% change since [1 year ago], when the number was []. 
+
+In [most recent year], the unemployment rate in [county name] was []. This is a []% change since [1 year ago], when the number was []. 
