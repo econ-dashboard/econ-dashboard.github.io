@@ -16,7 +16,7 @@ our_packages <-
 	c(
 		"tictoc",
 		"whisker",
-		"rjson",
+		"jsonlite",
 		"openxlsx",
 		"tidyverse"
 	)

@@ -72,15 +72,15 @@ for (fips_code in available_fips) {
 # Selects data columns relevant to Javascript search function.
 cty_fips_mappings_json <- 
 	cty_fips_mappings %>% 
-	select(area, county_page_url)
+	select(state, area, county_page_url)
 
 # Transforms relevant columns from R dataframe to JSON list.
 json_for_search <- 
-	toJSON(
-		unname(
-			split(cty_fips_mappings_json, 1:nrow(cty_fips_mappings_json))
-		)
-	)
+	cty_fips_mappings_json %>% 
+	group_by(state) %>% 
+	nest() %>% 
+	pivot_wider(names_from = state, values_from = data) %>% 
+	toJSON(pretty = T)
 
 # Writes JSON for JS search to relevant file path.
 writeLines(
