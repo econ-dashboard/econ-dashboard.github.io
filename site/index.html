@@ -21,18 +21,19 @@
         <div class="content"></div>
         <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
         
-      <script> 
+      <script>
         let stateButton = document.querySelector("button");
 
         async function loadJSON() {
-          let requestJSON = new Request('county-data/json/json_for_search.json');
-          let fetchResponse = await fetch(requestJSON);
-          let jsonValue = await fetchResponse.json();
-          var resolvedJSONValue = Promise.resolve(jsonValue);
-          console.log(resolvedJSONValue.typeof);
-          // here I get undefined for type and I wasn't sure if that should be the case
-          return resolvedJSONValue;
-      }
+          let url = 'county-data/json/json_for_search.json';
+          //let requestJSON = new Request(url);
+          let response = await fetch(url);
+          let json = await response.json();
+          //At this point the JSON has been fetched and deserialized to
+          // a JS object, as can be seen from the console if you load
+          // this in the browser.
+          console.log(json);
+         }
 
         stateButton.addEventListener("click", () => {
           var object = Object.keys(resolvedJSONValue);
