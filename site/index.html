@@ -26,7 +26,6 @@
 
         async function loadJSON() {
           let url = 'county-data/json/json_for_search.json';
-          //let requestJSON = new Request(url);
           let response = await fetch(url);
           let json = await response.json();
           //At this point the JSON has been fetched and deserialized to
