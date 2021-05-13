@@ -4,9 +4,10 @@
     <meta charset="UTF-8 /" />
     <title>Econ dashboard landing page</title>
     <link rel="stylesheet" href="static/css/landing-style.css" />
+    <!-- <script src="static/js/home.js"> </script> -->
   </head>
 
-  <body>
+  <body onload="loadJSON ()">
     <div class="page-container">
       <header class="page-header">
         <p>Local Economy Indicator</p>
@@ -17,128 +18,44 @@
         <!-- <input type="text" placeholder="Search county.." />
         <p class="dropdown"></p> -->
         <button type="button" class="collapsible" data-state="AL" id="AL">Alabama</button>
-        <div class="content">
+        <div class="content"></div>
         <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
-
         
-      <script>          
+      <script> 
         let stateButton = document.querySelector("button");
-        const requestJSON = new Request('county-data/json/json_for_search.json');
 
-        fetch(requestJSON)
-          .then(response => response.json()
-          .then(data => {
-            if (stateButton.dataset.state = "AL") {
-              let listItem = document.createElement('li');
-              let listCounties = "A,B,C"; // list of counties from JSON 
-              listItem.appendChild(listCounties);
-              let = document.getElementById("AL");
-              // let insertedNode = stateButton.insertAfter
-            }
-          }));
-
-
-
-
+        async function loadJSON() {
+          let requestJSON = new Request('county-data/json/json_for_search.json');
+          let fetchResponse = await fetch(requestJSON);
+          let jsonValue = await fetchResponse.json();
+          var resolvedJSONValue = Promise.resolve(jsonValue);
+          console.log(resolvedJSONValue.typeof);
+          // here I get undefined for type and I wasn't sure if that should be the case
+          return resolvedJSONValue;
+      }
 
         stateButton.addEventListener("click", () => {
-          if (stateButton.dataset.state = "AZ") // will become a variable for state key)
-            fetch("county-data/json/json_for_search.json")
-            .then(response => {
-              const responseJSON = response.json();
-              // const parsedJSON = JSON.parse(responseJSON);
-              console.log(responseJSON.typeof);
-            });
-         });
-     
-
-
-          
-          // pseudo coding
-          // if (stateButton.dataset.state = //particular state key) {
-          //   // search for counties that correspond to the specific state in json
-          //   // make a list
-          //   console.log(stateButton.dataset.state);
-          // };
+          var object = Object.keys(resolvedJSONValue);
+          console.log(object);
+          // says resolvedJSONValue is not defined
+          if (object == stateButton.dataset.state) {
+              // make it list counties    
+          }; 
+        });
       </script>
 
-          // <!-- You'll need a script that attaches an event handler
+
+
+
+<!-- 
+          // You'll need a script that attaches an event handler
           // to the list items for the ul of states. The event handler function
           // can pluck the "data-state" value and use that to pull the list of counties
           // for the given state and render the counties visually.
 
           // You'll need to decide on the o 
-          // -->
+          //  -->
 
-
-          <ul>
-            <li>Alameda County</li>
-            <li>Alpine County</li>
-            <li>Amador County</li>
-            <li>Butte County</li>
-            <li>Calaveras County</li>
-            <li>Colusa County</li>
-            <li>Contra Costa County</li>
-            <li>Del Norte County</li>
-            <li>El Dorado County</li>
-            <li>Fresno County</li>
-            <li>Glenn County</li>
-            <li>Humboldt County</li>
-            <li>Imperial County</li>
-            <li>Inyo County</li>
-            <li>Kern County</li>
-            <li>Kings County</li>
-            <li>Lake County</li>
-            <li>Lassen County</li>
-            <li>Los Angeles County</li>
-            <li>Madera County</li>
-            <li>Marin County</li>
-            <li>Mariposa County</li>
-            <li>Mendocino County</li>
-            <li>Merced County</li>
-            <li>Modoc County</li>
-            <li>Mono County</li>
-            <li>Monterey County</li>
-            <li>Napa County</li>
-            <li>Nevada County</li>
-            <li>Orange County</li>
-            <li>Placer County</li>
-            <li>Plumas County</li>
-            <li>Riverside County</li>
-            <li>Sacramento County</li>
-            <li>San Benito County</li>
-            <li>San Bernardino County</li>
-            <li>San Diego County</li>
-            <li>San Francisco County</li>
-            <li>San Joaquin County</li>
-            <li>San Luis Obispo County</li>
-            <li>San Mateo County</li>
-            <li>Santa Barbara County</li>
-            <li>Santa Clara County</li>
-            <li>Santa Cruz County</li>
-            <li>Shasta County</li>
-            <li>Sierra County</li>
-            <li>Siskiyou County</li>
-            <li>Solano County</li>
-            <li>Sonoma County</li>
-            <li>Stanislaus County</li>
-            <li>Sutter County</li>
-            <li>Tehama County</li>
-            <li>Trinity County</li>
-            <li>Tulare County</li>
-            <li>Tuolumne County</li>
-            <li>Ventura County</li>
-            <li>Yolo County</li>
-            <li>Yuba County</li>
-          </ul>
-        </div>
-        <button type="button" class="collapsible">State 2</button>
-        <div class="content">
-          <ul>
-            <li>County 1</li>
-            <li>County 2</li>
-          </ul>
-        </div>
       </div>
     </div>
   </body>
