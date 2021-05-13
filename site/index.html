@@ -22,7 +22,6 @@
         <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
         
       <script>
-        let stateButton = document.querySelector("button");
 
         async function loadJSON() {
           let url = 'county-data/json/json_for_search.json';
@@ -31,17 +30,40 @@
           //At this point the JSON has been fetched and deserialized to
           // a JS object, as can be seen from the console if you load
           // this in the browser.
+          // NOTE: You'll need to do something with the JSON at this point, e.g.
+          // write the data values into hidden <li> tags inside each state
+          // (with a class that allows you to use CSS to set the display so that they do not appear.
+          // Downstream, in your click handler, the job will be to select
+          // all the counties when a state is clicked and toggle their visibility.
           console.log(json);
          }
 
-        stateButton.addEventListener("click", () => {
-          var object = Object.keys(resolvedJSONValue);
+        // NOTE: You'll need to select all buttons to add the click handler,
+        // (document.querySelector will only return the first button that is found)
+        let stateButtons = document.querySelectorAll("button");
+        for (let button of stateButtons) {
+          button.addEventListener("click", (event) => {
+          // NOTE: Determine which state has been clicked
+          // and toggle the visibility of the state's counties
+          // See example of how to toggle at below URL
+          // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
+          let state = event.target.dataset.state;
+          console.log(`Hide/show elements for ${state}`);
+          // NOTE In your original code below, you're
+          // reference "resolvedJSONValue" which was originally
+          // created inside of the loadJSON function. This will cause
+          // an error because that variable is not accessible from inside
+          // this event handler function.
+          //var object = Object.keys(resolvedJSONValue);
+          /*
           console.log(object);
           // says resolvedJSONValue is not defined
           if (object == stateButton.dataset.state) {
               // make it list counties    
           }; 
-        });
+          */
+          });
+        }
       </script>
 
 
