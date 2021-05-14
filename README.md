@@ -6,22 +6,22 @@ A project for Stanford's COMM 277T course.
 
 #### Data Pipeline
 
-To run the data pipeline, from within the root folder, run:
+Currently, data for the project is not pushed to this repo to avoid unnecessary
+steps when trivial changes are made. To populate the data locally, clone this
+repo and run the following command from the project root:
 
 ```
 Rscript scripts/run_data_pipeline.R 
 ```
 
 This should populate all relevant data and HTML files for the website. Current
-runtime is fairly quick (~30 seconds), but we'll monitor as the data grows.
+runtime is fairly quick (~45 seconds), but we'll monitor as the data grows.
 
 #### Website Dev
 
-To run the website for development, navigate to the `site/` directory
-and fire up a python web server:
+To run the website for development fire up a python web server:
 
 ```
-cd site
 python -m http.server
 ```
 
@@ -62,23 +62,23 @@ Below is an overview of the project structure. It is subject to change as the pr
 ├── bna-econ-n-metrics.Rproj
 ├── README.md
 ├── data
-│   ├── processed (Raw data that has been transformed)
-│   └── raw (Copy of original source data when neccessary)
+|    ├── processed (Raw data that has been transformed)
+|    └── raw (Copy of original source data when neccessary)
 ├── lib (Re-usable Python or R code in .py or .R files)
-│   ├── __init__.py
-│   ├──  load_r_libraries.py
-│   └── utils.py
+|    ├── __init__.py
+|    ├──  load_r_libraries.py
+|    └── utils.py
 ├── notebooks (Jupyter notebooks or Rmarkdown files if neccessary to share)
 ├── scripts
-│   ├── analysis (Analyze data for templating)
-│   ├── data_wrangling (Source and clean data for analysis)
-│   ├── templates (HTML template/script to be used in Whisker rendering)
-├── site
-│   ├── county-pages (HTML files for each county)
-│   ├── county-data (data files for each county)
-│   └── static
-│       ├── CSS
-│       └── JS
+|    ├── analysis (Analyze data for templating)
+|    ├── data_wrangling (Source and clean data for analysis)
+|    └── templates (HTML template/script to be used in Whisker rendering)
+├── county-pages (HTML files for each county)
+├── county-data (data files for each county)
+|    └── JSON
+├── static
+|    ├── CSS
+|    └── JS
 └── tasks (Invoke task definitions)
     ├── __init__.py
     └── code.py

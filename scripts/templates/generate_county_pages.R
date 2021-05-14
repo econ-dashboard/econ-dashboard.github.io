@@ -45,7 +45,7 @@ for (record in 1:nrow(data_county_names)) {
 	)
 }
 
-writeLines("All HTML files generated! HTML files are stored in site/county-pages/.")
+writeLines("All HTML files generated! HTML files are stored in county-pages/.")
 
 # End timer
 toc()
