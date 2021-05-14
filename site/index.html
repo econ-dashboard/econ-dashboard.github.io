@@ -17,10 +17,10 @@
       <div class="search-content">
         <!-- <input type="text" placeholder="Search county.." />
         <p class="dropdown"></p> -->
-        <button type="button" class="collapsible" data-state="AL" id="AL">Alabama</button>
-        <div class="content"></div>
-        <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
-        
+        <ul id="statelist">
+          <li class="collapsible" data-state="AL" id="AL">Alabama</li>
+          <li class="collapsible" data-state="AK" id="AK">Alaska</li>
+      </ul>        
       <script>
 
         async function loadJSON() {
@@ -40,7 +40,7 @@
 
         // NOTE: You'll need to select all buttons to add the click handler,
         // (document.querySelector will only return the first button that is found)
-        let stateButtons = document.querySelectorAll("button");
+        let stateButtons = document.querySelectorAll(".collapsible");
         for (let button of stateButtons) {
           button.addEventListener("click", (event) => {
           // NOTE: Determine which state has been clicked
