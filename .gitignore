@@ -8,4 +8,4 @@ pip-delete-this-directory.txt
 *.zip
 data/raw/lau/
 data/raw/qcew/
-site/county-pages/
+county-pages/

@@ -16,7 +16,7 @@ writeLines("Pulling BLS LAU unemployment data...")
 # This path is a partial path and "<two-digit year>.xlsx" need to be appended to
 # properly make the call to the source.
 lau_data_url_in <- "https://www.bls.gov/lau/laucnty"
-lau_data_path_out <- "site/county-data/counties/"
+lau_data_path_out <- "county-data/counties/"
 
 # Creates a list of two-digit years for which data is available.
 available_years <-
@@ -39,6 +39,7 @@ data_lau <-
 for (year in available_years) {
 	
 	data_lau <-
+		
 		read.xlsx(
 			str_c(lau_data_url_in, year, ".xlsx"), 
 			startRow = 7, 
@@ -68,7 +69,7 @@ for (fip in available_fips) {
 		write_csv(str_c(lau_data_path_out, fip, "/lau_data_", fip, ".csv"))
 }
 
-writeLines("BLS LAU data successfully pulled and stored at site/county-data/counties/<county fips>/.")
+writeLines("BLS LAU data successfully pulled and stored at county-data/counties/<county fips>/.")
 
 # End timer
 toc()

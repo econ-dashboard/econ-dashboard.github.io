@@ -49,10 +49,10 @@ cty_fips_mappings <-
 			str_replace_all(" |/", "-"),
 		# Constructs the file path/URL for each area.
 		# TO-DO: May consider making this URL just the unique FIPS code.
-		county_page_url = 
-			paste0("/county-pages/", area_formatted, "-", fips_code, ".html"),
 		county_page_filepath = 
-			paste0("site", county_page_url)
+			paste0("county-pages/", area_formatted, "-", fips_code, ".html"),
+		county_page_url = 
+			paste0("/", county_page_filepath)
 	)
 
 # Writes the processed data to a CSV file in the `data/processed/reference_data`
@@ -63,10 +63,10 @@ cty_fips_mappings %>% write_csv(cty_fips_path_out)
 # throughout the pipeline.
 available_fips <- cty_fips_mappings %>% pull(fips_code)
 
-writeLines(paste0("Creating unique data folders for ", length(available_fips), " available counties within site/county-data/counties/..."))
+writeLines(paste0("Creating unique data folders for ", length(available_fips), " available counties within county-data/counties/..."))
 
 for (fips_code in available_fips) {
-	dir.create(str_c("site/county-data/counties/", fips_code), showWarnings = F)
+	dir.create(str_c("county-data/counties/", fips_code), showWarnings = F)
 }
 
 # Selects data columns relevant to Javascript search function.
@@ -85,14 +85,14 @@ json_for_search <-
 # Writes JSON for JS search to relevant file path.
 writeLines(
 	json_for_search,
-	"site/county-data/json/json_for_search.json"
+	"county-data/json/json_for_search.json"
 )
 
 rm(cty_fips_mappings, cty_fips_mappings_json, cty_fips_path_out, cty_fips_url_in)
 
 writeLines("County-FIPS code mappings pulled and processed.")
 writeLines("County data is stored in data/processed/reference_data/.")
-writeLines("JSON data for JS search function is stored at site/county-data/json/json_for_search.json.")
+writeLines("JSON data for JS search function is stored at county-data/json/json_for_search.json.")
 
 # End timer
 toc()
