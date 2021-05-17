@@ -97,13 +97,14 @@
           // Downstream, in your click handler, the job will be to select
           // all the counties when a state is clicked and toggle their visibility.
 
-          let jsonKeys = Object.keys(json); 
-          let jsonValues = Object.values(json);
-          for (key in json) {
-            if (jsonKeys == document.querySelectorAll(".stateClass").dataset.state) {
-            document.querySelectorAll(".countyClass").innerHTML = jsonValues;
-            }
-          } 
+          for (statePostal in json) {
+            // For state in json,
+            // 1) Look up the data values in the json (e.g. json[statePostal])
+            // 2) Using the county data, construct a new unordered list for the state's counties
+            // 3) Locate the li for the given state (this is hard-coded into page already)
+            // 4) Insert the newly created unordered list of counties into the DOM (i.e. append 
+            //   to the li for the state)
+          }
         }
 
         // NOTE: You'll need to select all buttons to add the click handler,
@@ -113,15 +114,18 @@
         let countyList = document.querySelectorAll(".countyClass");
 
 
-        for (let chosenState of stateList) {
-          chosenState.addEventListener("click", (event) => {
-              document.querySelector(".countyClass").classList.toggle("show");
-
+        for (let stateNode of stateList) {
+          stateNode.addEventListener("click", (event) => {
           // NOTE: Determine which state has been clicked
           // and toggle the visibility of the state's counties
           // See example of how to toggle at below URL
           // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
           let state = event.target.dataset.state;
+          // Something like below selector should work for toggling visibility
+          // Below won't work until you've completed the process of writing the nested county lists
+          // inside of the li for each state.
+          event.target.querySelector('ul').classList.toggle('hidden');
+          // Select the list of counties
           console.log(`Hide/show elements for ${state}`);
           });
         };
