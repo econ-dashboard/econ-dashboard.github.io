@@ -1,64 +1,101 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    /* height: 100vh; */
-    margin: 0;
-    font: 500 100% system-ui, sans-serif;
+  /* height: 100vh; */
+  margin: 0;
+  font: 500 100% system-ui, sans-serif;
 }
 
 .page-container {
-    background: white;
-    /* height: calc(100vh - 10px); */
-    display: grid;
-    /* grid-template-columns: 100px auto 100px; */
-    grid-template-rows: min-content auto min-content;
-    /* > * {
-        padding: 1rem;
-        text-align: center;
-    } */
+  background: white;
+  /* height: calc(100vh - 10px); */
+  display: grid;
+  /* grid-template-columns: 100px auto 100px; */
+  grid-template-rows: min-content auto min-content;
+  /* > * {
+      padding: 1rem;
+      text-align: center;
+  } */
 }
 
 .page-header {
-    grid-column: 1 / 4;
-    padding: 10px;
-    text-align: center;
-    align-self: center;
-    background: #ffecb3;
-    display: grid;
-    /* border-bottom: 1px solid grey; */
+  grid-column: 1 / 4;
+  padding: 10px;
+  text-align: center;
+  align-self: center;
+  background: #ffecb3;
+  display: grid;
+  /* border-bottom: 1px solid grey; */
 }
 
 .search-content a {
-    float: left;
-    font-size: 16px;
-    border: 1px solid black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
+  float: left;
+  font-size: 16px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 
-  .collapsible {
-    background-color: #777;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-  }
-  
-  .active, .collapsible:hover {
-    background-color: #555;
-  }
-  
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
+
+.stateClass {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  position: relative;
+}
+
+.active, .stateClass:hover {
+  background-color: #555;
+}
+
+.countyClass {
+  display: none;
+  width: 100%;
+  overflow: auto;
+}
+
+.show {
+  display:block;
+  width: 100%;
+}
+/* 
+li {
+  display: block;
+  transition-duration: 0.5s;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+  display: none;
+} */
+
+
+.toggleStyle {
+  width: 100%;
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+}
+
+/* .content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} */

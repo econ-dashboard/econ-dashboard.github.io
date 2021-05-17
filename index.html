@@ -4,9 +4,10 @@
     <meta charset="UTF-8 /" />
     <title>Econ dashboard landing page</title>
     <link rel="stylesheet" href="static/css/landing-style.css" />
+    <!-- <script src="static/js/home.js"> </script> -->
   </head>
 
-  <body>
+  <body onload="loadJSON ()">
     <div class="page-container">
       <header class="page-header">
         <p>Local Economy Indicator</p>
@@ -16,129 +17,128 @@
       <div class="search-content">
         <!-- <input type="text" placeholder="Search county.." />
         <p class="dropdown"></p> -->
-        <button type="button" class="collapsible" data-state="AL" id="AL">Alabama</button>
-        <div class="content">
-        <button type="button" class="collapsible" data-state="AK" id="AK">Alaska</button>
+        <ul>
+          <li class="stateClass" data-state="AL" id="AL">Alabama</li>
+            <ul>
+              <li class="countyClass">
+                list of counties 
+              </li>
+            </ul>
+          <li class="stateClass" data-state="AK" id="AK">Alaska</li>
+            <ul>
+              <li class="countyClass">
+                list of counties 
+              </li>
+            </ul>
+          <li class="stateClass" data-state="AZ" id="AZ">Arizona</li>
+          <li class="stateClass" data-state="AR" id="AR">Arkansas</li>
+          <li class="stateClass" data-state="CA" id="CA">California</li>
+          <li class="stateClass" data-state="CO" id="CO">Colorado</li>
+          <li class="stateClass" data-state="CT" id="CT">Connecticut</li>
+          <li class="stateClass" data-state="DE" id="DE">Delware</li>
+          <li class="stateClass" data-state="FL" id="FL">Florida</li>
+          <li class="stateClass" data-state="GA" id="GA">Georgia</li>
+          <li class="stateClass" data-state="HI" id="HI">Hawaii</li>
+          <li class="stateClass" data-state="ID" id="ID">Idaho</li>
+          <li class="stateClass" data-state="IL" id="IL">Illinois</li>
+          <li class="stateClass" data-state="IN" id="IN">Indiana</li>
+          <li class="stateClass" data-state="IA" id="IA">Iowa</li>
+          <li class="stateClass" data-state="KS" id="KS">Kansas</li>
+          <li class="stateClass" data-state="KY" id="KY">Kentucky</li>
+          <li class="stateClass" data-state="LA" id="LA">Louisiana</li>
+          <li class="stateClass" data-state="ME" id="ME">Maine</li>
+          <li class="stateClass" data-state="MD" id="MD">Maryland</li>
+          <li class="stateClass" data-state="MA" id="MA">Massachusetts</li>
+          <li class="stateClass" data-state="MI" id="MI">Michigan</li>
+          <li class="stateClass" data-state="MN" id="MN">Minnesota</li>
+          <li class="stateClass" data-state="MS" id="MS">Mississippi</li>
+          <li class="stateClass" data-state="MO" id="MO">Missouri</li>
+          <li class="stateClass" data-state="MT" id="MT">Montana</li>
+          <li class="stateClass" data-state="NE" id="NE">Nebraska</li>
+          <li class="stateClass" data-state="NV" id="NV">Nevada</li>
+          <li class="stateClass" data-state="NH" id="NH">New Hampshire	</li>
+          <li class="stateClass" data-state="NJ" id="NJ">New Jersey</li>
+          <li class="stateClass" data-state="NM" id="NM">New Mexico</li>
+          <li class="stateClass" data-state="NY" id="NY">New York</li>
+          <li class="stateClass" data-state="NC" id="NC">North Carolina</li>
+          <li class="stateClass" data-state="ND" id="ND">North Dakota</li>
+          <li class="stateClass" data-state="OH" id="OH">Ohio</li>
+          <li class="stateClass" data-state="OK" id="OK">Oklahoma</li>
+          <li class="stateClass" data-state="OR" id="OR">Oregon</li>
+          <li class="stateClass" data-state="PA" id="PA">Pennsylvania</li>
+          <li class="stateClass" data-state="RI" id="RI">Rhode Island</li>
+          <li class="stateClass" data-state="SC" id="SC">South Carolina</li>
+          <li class="stateClass" data-state="SD" id="SD">South Dakota</li>
+          <li class="stateClass" data-state="TN" id="TN">Tennessee</li>
+          <li class="stateClass" data-state="TX" id="TX">Texas</li>
+          <li class="stateClass" data-state="UT" id="UT">Utah</li>
+          <li class="stateClass" data-state="VT" id="VT">Vermont</li>
+          <li class="stateClass" data-state="VA" id="VA">Virginia</li>
+          <li class="stateClass" data-state="WA" id="WA">Washington</li>
+          <li class="stateClass" data-state="WV" id="WV">West Virginia</li>
+          <li class="stateClass" data-state="WI" id="WI">Wisconsin</li>
+          <li class="stateClass" data-state="WY" id="WY">Wyoming</li>
+      </ul>      
+      
+      <p id="demo"></p>
+      <script>
+        async function loadJSON() {
+          let url = 'county-data/json/json_for_search.json';
+          let response = await fetch(url);
+          let json = await response.json();
+          //At this point the JSON has been fetched and deserialized to
+          // a JS object, as can be seen from the console if you load
+          // this in the browser.
+          // NOTE: You'll need to do something with the JSON at this point, e.g.
+          // write the data values into hidden <li> tags inside each state
+          // (with a class that allows you to use CSS to set the display so that they do not appear.
+          // Downstream, in your click handler, the job will be to select
+          // all the counties when a state is clicked and toggle their visibility.
 
-        
-      <script>          
-        let stateButton = document.querySelector("button");
-        const requestJSON = new Request('county-data/json/json_for_search.json');
-
-        fetch(requestJSON)
-          .then(response => response.json()
-          .then(data => {
-            if (stateButton.dataset.state = "AL") {
-              let listItem = document.createElement('li');
-              let listCounties = "A,B,C"; // list of counties from JSON 
-              listItem.appendChild(listCounties);
-              let = document.getElementById("AL");
-              // let insertedNode = stateButton.insertAfter
+          let jsonKeys = Object.keys(json); 
+          let jsonValues = Object.values(json);
+          for (key in json) {
+            if (jsonKeys == document.querySelectorAll(".stateClass").dataset.state) {
+              document.querySelectorAll(".countyClass").innerHTML = jsonValues;
+              // Question: should I rather be trying to append to <li>? 
             }
-          }));
+          } 
+        }
+
+        // NOTE: You'll need to select all buttons to add the click handler,
+        // (document.querySelector will only return the first button that is found)
+
+        let stateList = document.querySelectorAll(".stateClass");
+        let countyList = document.querySelectorAll(".countyClass");
 
 
+        for (let chosenState of stateList) {
+          chosenState.addEventListener("click", (event) => {
+              document.querySelector(".countyClass").classList.toggle("show");
+              // this is also only toggling Alabama, but when I change querySelector to querySelectorAll, I get an error message (I'm assuming classList isn't compatible with it)
 
-
-
-        stateButton.addEventListener("click", () => {
-          if (stateButton.dataset.state = "AZ") // will become a variable for state key)
-            fetch("county-data/json/json_for_search.json")
-            .then(response => {
-              const responseJSON = response.json();
-              // const parsedJSON = JSON.parse(responseJSON);
-              console.log(responseJSON.typeof);
-            });
-         });
-     
-
-
-          
-          // pseudo coding
-          // if (stateButton.dataset.state = //particular state key) {
-          //   // search for counties that correspond to the specific state in json
-          //   // make a list
-          //   console.log(stateButton.dataset.state);
-          // };
+          // NOTE: Determine which state has been clicked
+          // and toggle the visibility of the state's counties
+          // See example of how to toggle at below URL
+          // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
+          let state = event.target.dataset.state;
+          console.log(`Hide/show elements for ${state}`);
+          });
+        };
       </script>
 
-          // <!-- You'll need a script that attaches an event handler
+
+
+
+<!-- 
+          // You'll need a script that attaches an event handler
           // to the list items for the ul of states. The event handler function
           // can pluck the "data-state" value and use that to pull the list of counties
           // for the given state and render the counties visually.
 
           // You'll need to decide on the o 
-          // -->
+          //  -->
 
-
-          <ul>
-            <li>Alameda County</li>
-            <li>Alpine County</li>
-            <li>Amador County</li>
-            <li>Butte County</li>
-            <li>Calaveras County</li>
-            <li>Colusa County</li>
-            <li>Contra Costa County</li>
-            <li>Del Norte County</li>
-            <li>El Dorado County</li>
-            <li>Fresno County</li>
-            <li>Glenn County</li>
-            <li>Humboldt County</li>
-            <li>Imperial County</li>
-            <li>Inyo County</li>
-            <li>Kern County</li>
-            <li>Kings County</li>
-            <li>Lake County</li>
-            <li>Lassen County</li>
-            <li>Los Angeles County</li>
-            <li>Madera County</li>
-            <li>Marin County</li>
-            <li>Mariposa County</li>
-            <li>Mendocino County</li>
-            <li>Merced County</li>
-            <li>Modoc County</li>
-            <li>Mono County</li>
-            <li>Monterey County</li>
-            <li>Napa County</li>
-            <li>Nevada County</li>
-            <li>Orange County</li>
-            <li>Placer County</li>
-            <li>Plumas County</li>
-            <li>Riverside County</li>
-            <li>Sacramento County</li>
-            <li>San Benito County</li>
-            <li>San Bernardino County</li>
-            <li>San Diego County</li>
-            <li>San Francisco County</li>
-            <li>San Joaquin County</li>
-            <li>San Luis Obispo County</li>
-            <li>San Mateo County</li>
-            <li>Santa Barbara County</li>
-            <li>Santa Clara County</li>
-            <li>Santa Cruz County</li>
-            <li>Shasta County</li>
-            <li>Sierra County</li>
-            <li>Siskiyou County</li>
-            <li>Solano County</li>
-            <li>Sonoma County</li>
-            <li>Stanislaus County</li>
-            <li>Sutter County</li>
-            <li>Tehama County</li>
-            <li>Trinity County</li>
-            <li>Tulare County</li>
-            <li>Tuolumne County</li>
-            <li>Ventura County</li>
-            <li>Yolo County</li>
-            <li>Yuba County</li>
-          </ul>
-        </div>
-        <button type="button" class="collapsible">State 2</button>
-        <div class="content">
-          <ul>
-            <li>County 1</li>
-            <li>County 2</li>
-          </ul>
-        </div>
       </div>
     </div>
   </body>
