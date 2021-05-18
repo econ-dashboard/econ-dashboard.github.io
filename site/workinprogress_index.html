@@ -82,12 +82,31 @@
 
       </ul>      
       
+      <p id="demo"></p>
       <script>
         async function loadJSON() {
           let url = 'county-data/json/json_for_search.json';
           let response = await fetch(url);
           let json = await response.json();
           let allStates = json[0];
+          console.log(allStates.AK);
+          for (singleState in allStates) {
+            let countyInfo = Object.keys(singleState);
+            console.log(singleState[countyInfo]);
+            // if (singleState == document.getElementsByClassName("stateclass").dataset.state) {
+            //   document.querySelectorAll(".countyClass").innerHTML = jsonValues;
+            }
+          }
+          
+          // console.log(allStates);
+
+          // console.log(json[0].AK[0].area)
+
+          // Object.keys(json).forEach (key => {
+          //   console.log(key, json[key]);
+          // });
+          
+
 
           //At this point the JSON has been fetched and deserialized to
           // a JS object, as can be seen from the console if you load
@@ -97,60 +116,62 @@
           // (with a class that allows you to use CSS to set the display so that they do not appear.
           // Downstream, in your click handler, the job will be to select
           // all the counties when a state is clicked and toggle their visibility.
-          // console.log(allStates);
 
-          // console.log(json[0].AK[0].area)
+          // let jsonKeys = Object.keys(json); 
+          // let jsonValues = Object.values(json);
 
+          // console.log(document.getElementsByClassName("stateClass")[0].id)
 
-          for (singleState in allStates) {
-            let countiesPerState = allStates[singleState];
-            // check what's happening with console.log(countiesPerState[0].county_page_url);
+          // for (state in stateList) {
+          //   console.log(state);
+          // }
 
-            //instead of CA, why can't I do countyList.dataset.state below? 
-            if (singleState == "CA") {
-              let createCountyUL = document.createElement('ul');
-              let createCountyLI = document.createElement('li');
-              document.getElementById(singleState).appendChild(createCountyUL).appendChild(createCountyLI).innerHTML = countiesPerState;
-            }
-          }
-        }
+          // check data type
+          // console.log(json[0]["AK"][0]);
 
+          // for (let keys of json) {
+          //   let x = 0;
+          //   for (let state of stateList) {
+          //     if (keys == document.getElementsByClassName("stateClass")[x].id) {
+          //       console.log("hello");
+          //     }
+              // x = x+1;
+              // console.log(keys);
+            // }
+            // console.log(keys["AK"]);
 
-            // of !! look up 
-            // take the postal; look up corresponding value in JSON; 
-            //
+          // for (let key in json) {
+          //   let key = i; 
+          //   let val = json[i];
+          //   for (let j in val){
+          //     let subKey = j;
+          //     let subVal = val[j];
+          //     console.log(subKey);
+          //   }
 
-
-            // For state in json,
-            // 1) Look up the data values in the json (e.g. json[statePostal])
-            // 2) Using the county data, construct a new unordered list for the state's counties
-            // 3) Locate the li for the given state (this is hard-coded into page already)
-            // 4) Insert the newly created unordered list of counties into the DOM (i.e. append 
-            //   to the li for the state)
+            // if (jsonKeys == document.querySelectorAll(".stateClass").dataset.state) {
+            // document.querySelectorAll(".countyClass").innerHTML = jsonValues;
+            // }
+          // } 
 
         // NOTE: You'll need to select all buttons to add the click handler,
         // (document.querySelector will only return the first button that is found)
 
-        var stateList = document.querySelectorAll(".stateClass");
-        var countyList = document.querySelectorAll(".countyClass");
+        let stateList = document.querySelectorAll(".stateClass");
+        let countyList = document.querySelectorAll(".countyClass");
 
+        for (let chosenState of stateList) {
+          chosenState.addEventListener("click", (event) => {
+              document.querySelector(".countyClass").classList.toggle("show");
 
-        // for (let stateNode of stateList) {
-        //   stateNode.addEventListener("click", (event) => {
-        //   // NOTE: Determine which state has been clicked
-        //   // and toggle the visibility of the state's counties
-        //   // See example of how to toggle at below URL
-        //   // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
-        //   let state = event.target.dataset.state;
-        //   // Something like below selector should work for toggling visibility
-        //   // Below won't work until you've completed the process of writing the nested county lists
-        //   // inside of the li for each state.
-        //   event.target.querySelector('ul').classList.toggle('hidden');
-        //   // Select the list of counties
-        //   console.log(`Hide/show elements for ${state}`);
-        //   });
-        // };
-
+          // NOTE: Determine which state has been clicked
+          // and toggle the visibility of the state's counties
+          // See example of how to toggle at below URL
+          // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
+          let state = event.target.dataset.state;
+          console.log(`Hide/show elements for ${state}`);
+          });
+        };
       </script>
 
 
