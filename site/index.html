@@ -10,31 +10,21 @@
   <body onload="loadJSON ()">
     <div class="page-container">
       <header class="page-header">
-        <p>Local Economy Indicator</p>
+        <h1>Local Economy Indicator Dashboard</h1>
+        <h2> Click on a state from the list below to navigate to your county. </h2>
       </header>
     </div>
     <div class="search-container">
       <div class="search-content">
-        <!-- <input type="text" placeholder="Search county.." />
-        <p class="dropdown"></p> -->
         <ul>
           <li class="stateClass" data-state="AL" id="AL">Alabama</li>
-            <ul>
-              <li class="countyClass">
-                list of counties 
-              </li>
-            </ul>
           <li class="stateClass" data-state="AK" id="AK">Alaska</li>
-            <ul>
-              <li class="countyClass">
-                list of counties 
-              </li>
-            </ul>
           <li class="stateClass" data-state="AZ" id="AZ">Arizona</li>
           <li class="stateClass" data-state="AR" id="AR">Arkansas</li>
           <li class="stateClass" data-state="CA" id="CA">California</li>
           <li class="stateClass" data-state="CO" id="CO">Colorado</li>
           <li class="stateClass" data-state="CT" id="CT">Connecticut</li>
+          <li class="stateClass" data-state="DC" id="DC">D.C.</li>
           <li class="stateClass" data-state="DE" id="DE">Delware</li>
           <li class="stateClass" data-state="FL" id="FL">Florida</li>
           <li class="stateClass" data-state="GA" id="GA">Georgia</li>
@@ -78,8 +68,6 @@
           <li class="stateClass" data-state="WV" id="WV">West Virginia</li>
           <li class="stateClass" data-state="WI" id="WI">Wisconsin</li>
           <li class="stateClass" data-state="WY" id="WY">Wyoming</li>
-
-
       </ul>      
       
       <script>
@@ -103,15 +91,28 @@
 
 
           for (singleState in allStates) {
-            let countiesPerState = allStates[singleState];
-            // check what's happening with console.log(countiesPerState[0].county_page_url);
-
-            //instead of CA, why can't I do countyList.dataset.state below? 
-            if (singleState == "CA") {
-              let createCountyUL = document.createElement('ul');
-              let createCountyLI = document.createElement('li');
-              document.getElementById(singleState).appendChild(createCountyUL).appendChild(createCountyLI).innerHTML = countiesPerState;
+            if (["PR"].includes(singleState)) {
+              continue;
             }
+
+            let counties = allStates[singleState];
+            let countyUl = document.createElement('ul');
+            countyUl.classList.add("hidden");
+            // TODO: set the class to hidden on the UL by default on page load
+            // You'll need a CSS selector that sets .hidden to something like display: none;
+            for (let county of counties) {
+              let countyLi = document.createElement('li');
+              countyLi.innerHTML = `<a href="${county.county_page_url}" target="_blank">${county.area}</a>`; 
+              countyUl.appendChild(countyLi);
+            }
+            try {
+              document.getElementById(singleState)
+              .appendChild(countyUl)
+            } catch {
+              console.log(singleState);
+              console.log(countyUl);
+            }
+
           }
         }
 
@@ -132,24 +133,24 @@
         // (document.querySelector will only return the first button that is found)
 
         var stateList = document.querySelectorAll(".stateClass");
-        var countyList = document.querySelectorAll(".countyClass");
+        //var countyList = document.querySelectorAll(".countyClass");
 
 
-        // for (let stateNode of stateList) {
-        //   stateNode.addEventListener("click", (event) => {
+        for (let stateNode of stateList) {
+          stateNode.addEventListener("click", (event) => {
         //   // NOTE: Determine which state has been clicked
         //   // and toggle the visibility of the state's counties
         //   // See example of how to toggle at below URL
         //   // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
-        //   let state = event.target.dataset.state;
+          let state = event.target.dataset.state;
         //   // Something like below selector should work for toggling visibility
         //   // Below won't work until you've completed the process of writing the nested county lists
         //   // inside of the li for each state.
-        //   event.target.querySelector('ul').classList.toggle('hidden');
+              event.target.querySelector('ul').classList.toggle('hidden');
         //   // Select the list of counties
-        //   console.log(`Hide/show elements for ${state}`);
-        //   });
-        // };
+          console.log(`Hide/show elements for ${state}`);
+           });
+        };
 
       </script>
 
@@ -167,5 +168,8 @@
 
       </div>
     </div>
+    <footer class='page-footer'>
+      <p>By Team Econ-n-metrics </p>
+    </footer>
   </body>
 </html>

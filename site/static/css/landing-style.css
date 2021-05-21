@@ -8,12 +8,15 @@ body {
     font: 500 100% system-ui, sans-serif;
 }
 
+
 .page-container {
     background: white;
     /* height: calc(100vh - 10px); */
-    display: grid;
+    display: flex;
     /* grid-template-columns: 100px auto 100px; */
-    grid-template-rows: min-content auto min-content;
+    /* grid-template-rows: min-content auto min-content; */
+    margin: 0 px;
+    align-items: stretch;
     /* > * {
         padding: 1rem;
         text-align: center;
@@ -21,52 +24,86 @@ body {
 }
 
 .page-header {
-    grid-column: 1 / 4;
+    width: 100%;
+    /* grid-column: 1 / 4; */
     padding: 10px;
     text-align: center;
     align-self: center;
     background: #ffecb3;
     display: grid;
+    border: 0px;
+
     /* border-bottom: 1px solid grey; */
 }
 
-.search-content a {
-    float: left;
-    font-size: 16px;
-    border: 1px solid black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
+.search-container {
+  display: flex;
+  justify-content: left;
+  margin: 0px;
+  padding: 0px;
+  justify-content: center;
+}
 
-  .stateClass {
-    background-color: #777;
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    position: relative;
-  }
-  
-  .active, .stateClass:hover {
-    background-color: #555;
-  }
 
-  .countyClass {
-    display: none;
-    width: 100%;
-    overflow: auto;
-  }
+.stateClass {
+  background-color: #d3d3d3;
+  color: 000000;
+  cursor: pointer;
+  padding: 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px; 
+  width: 900px;
+  border-bottom: solid grey .5px;
+}
 
-  .show {
+/* .stateClass li {
+  display: none;
+} */
+
+a {
+  outline: none;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+a:link {
+  color: #444444;
+}
+
+a:hover, 
+a:focus {
+  color: #000000;
+}
+
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.active, .stateClass:hover {
+  background-color: #d3d3d3;
+}
+
+.countyClass {
+  width: 100%;
+  overflow: auto;
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+
+  /* .show {
     display:block;
     width: 100%;
-  }
+  } */
 /* 
   li {
     display: block;
@@ -83,15 +120,6 @@ body {
     transition: all 0.5s ease;
     display: none;
   } */
-
-
-  .toggleStyle {
-    width: 100%;
-    padding: 25px;
-    background-color: coral;
-    color: white;
-    font-size: 25px;
-  }
   
   /* .content {
     padding: 0 18px;
