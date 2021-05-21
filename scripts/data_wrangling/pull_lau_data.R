@@ -36,10 +36,13 @@ data_lau <-
 		unemployment_rate = NA_real_
 	)
 
+# Iterates through each requested year and pulls BLS data by county on the 
+# unemployment rate.
 for (year in available_years) {
 	
 	data_lau <-
 		
+		# Read's the excel file provided by the BLS LAU API
 		read.xlsx(
 			str_c(lau_data_url_in, year, ".xlsx"), 
 			startRow = 7, 
@@ -56,13 +59,17 @@ for (year in available_years) {
 			num_unemployed = X7,
 			unemployment_rate = X8
 		) %>% 
+		
+		# Appends each year of data to the aggregate dataset, year by year.
 		rbind(data_lau)
 }
 
+# Generates the 5-digit county-specific FIPS code.
 data_lau <- 
 	data_lau %>% 
 	mutate(fips = str_c(state_fips, cty_fips))
 
+# Writes out a CSV of the data for every county in the data.
 for (fip in available_fips) {
 	data_lau %>% 
 		filter(fips == fip) %>% 
