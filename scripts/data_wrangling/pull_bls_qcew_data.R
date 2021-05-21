@@ -43,7 +43,7 @@ data_bls <-
 # BLS data.
 data_fips_mappings <-
 	fips_mappings_path_in %>% 
-	read_csv()
+	read_csv(col_types = cols())
 
 # Constructs a list of all quarters for which data is available depending on the
 # requested dates above.
