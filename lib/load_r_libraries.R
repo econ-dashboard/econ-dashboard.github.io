@@ -18,6 +18,7 @@ our_packages <-
 		"whisker",
 		"jsonlite",
 		"openxlsx",
+		"lubridate",
 		"tidyverse"
 	)
 
