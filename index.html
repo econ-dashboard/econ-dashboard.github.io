@@ -10,31 +10,21 @@
   <body onload="loadJSON ()">
     <div class="page-container">
       <header class="page-header">
-        <p>Local Economy Indicator</p>
+        <h1>Local Economy Indicator Dashboard</h1>
+        <h2> Click on a state from the list below to navigate to your county. </h2>
       </header>
     </div>
     <div class="search-container">
       <div class="search-content">
-        <!-- <input type="text" placeholder="Search county.." />
-        <p class="dropdown"></p> -->
         <ul>
           <li class="stateClass" data-state="AL" id="AL">Alabama</li>
-            <ul>
-              <li class="countyClass">
-                list of counties 
-              </li>
-            </ul>
           <li class="stateClass" data-state="AK" id="AK">Alaska</li>
-            <ul>
-              <li class="countyClass">
-                list of counties 
-              </li>
-            </ul>
           <li class="stateClass" data-state="AZ" id="AZ">Arizona</li>
           <li class="stateClass" data-state="AR" id="AR">Arkansas</li>
           <li class="stateClass" data-state="CA" id="CA">California</li>
           <li class="stateClass" data-state="CO" id="CO">Colorado</li>
           <li class="stateClass" data-state="CT" id="CT">Connecticut</li>
+          <li class="stateClass" data-state="DC" id="DC">D.C.</li>
           <li class="stateClass" data-state="DE" id="DE">Delware</li>
           <li class="stateClass" data-state="FL" id="FL">Florida</li>
           <li class="stateClass" data-state="GA" id="GA">Georgia</li>
@@ -80,12 +70,13 @@
           <li class="stateClass" data-state="WY" id="WY">Wyoming</li>
       </ul>      
       
-      <p id="demo"></p>
       <script>
         async function loadJSON() {
           let url = 'county-data/json/json_for_search.json';
           let response = await fetch(url);
           let json = await response.json();
+          let allStates = json[0];
+
           //At this point the JSON has been fetched and deserialized to
           // a JS object, as can be seen from the console if you load
           // this in the browser.
@@ -94,37 +85,73 @@
           // (with a class that allows you to use CSS to set the display so that they do not appear.
           // Downstream, in your click handler, the job will be to select
           // all the counties when a state is clicked and toggle their visibility.
+          // console.log(allStates);
 
-          let jsonKeys = Object.keys(json); 
-          let jsonValues = Object.values(json);
-          for (key in json) {
-            if (jsonKeys == document.querySelectorAll(".stateClass").dataset.state) {
-              document.querySelectorAll(".countyClass").innerHTML = jsonValues;
-              // Question: should I rather be trying to append to <li>? 
+          // console.log(json[0].AK[0].area)
+
+
+          for (singleState in allStates) {
+            if (["PR"].includes(singleState)) {
+              continue;
             }
-          } 
+
+            let counties = allStates[singleState];
+            let countyUl = document.createElement('ul');
+            countyUl.classList.add("hidden");
+            // TODO: set the class to hidden on the UL by default on page load
+            // You'll need a CSS selector that sets .hidden to something like display: none;
+            for (let county of counties) {
+              let countyLi = document.createElement('li');
+              countyLi.innerHTML = `<a href="${county.county_page_url}" target="_blank">${county.area}</a>`; 
+              countyUl.appendChild(countyLi);
+            }
+            try {
+              document.getElementById(singleState)
+              .appendChild(countyUl)
+            } catch {
+              console.log(singleState);
+              console.log(countyUl);
+            }
+
+          }
         }
+
+
+            // of !! look up 
+            // take the postal; look up corresponding value in JSON; 
+            //
+
+
+            // For state in json,
+            // 1) Look up the data values in the json (e.g. json[statePostal])
+            // 2) Using the county data, construct a new unordered list for the state's counties
+            // 3) Locate the li for the given state (this is hard-coded into page already)
+            // 4) Insert the newly created unordered list of counties into the DOM (i.e. append 
+            //   to the li for the state)
 
         // NOTE: You'll need to select all buttons to add the click handler,
         // (document.querySelector will only return the first button that is found)
 
-        let stateList = document.querySelectorAll(".stateClass");
-        let countyList = document.querySelectorAll(".countyClass");
+        var stateList = document.querySelectorAll(".stateClass");
+        //var countyList = document.querySelectorAll(".countyClass");
 
 
-        for (let chosenState of stateList) {
-          chosenState.addEventListener("click", (event) => {
-              document.querySelector(".countyClass").classList.toggle("show");
-              // this is also only toggling Alabama, but when I change querySelector to querySelectorAll, I get an error message (I'm assuming classList isn't compatible with it)
-
-          // NOTE: Determine which state has been clicked
-          // and toggle the visibility of the state's counties
-          // See example of how to toggle at below URL
-          // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
+        for (let stateNode of stateList) {
+          stateNode.addEventListener("click", (event) => {
+        //   // NOTE: Determine which state has been clicked
+        //   // and toggle the visibility of the state's counties
+        //   // See example of how to toggle at below URL
+        //   // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
           let state = event.target.dataset.state;
+        //   // Something like below selector should work for toggling visibility
+        //   // Below won't work until you've completed the process of writing the nested county lists
+        //   // inside of the li for each state.
+              event.target.querySelector('ul').classList.toggle('hidden');
+        //   // Select the list of counties
           console.log(`Hide/show elements for ${state}`);
-          });
+           });
         };
+
       </script>
 
 
