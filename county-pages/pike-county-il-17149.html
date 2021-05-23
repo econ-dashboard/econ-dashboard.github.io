@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset='UTF-8 /'>
+        <title> Econ dashboard detail page </title>
+        <link rel='stylesheet' href='../detail-style.css' />
+
+        <!-- vega embed-->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    </head>
+
+    <body>
+        <div class='page-container'>
+
+            <header class='page-header'>
+                <div class='home-button'><a href="">Home</a></div>
+                <div class='county-name'><h1>Pike County, IL</h1></div>
+            </header>
+
+            <div class='overview'> 
+                Placeholder: Most up-to-date overview statistics
+            </div>
+
+            <nav class='page-nav'>
+                <div class='category-nav'><a href="#business">Business</a></div>
+                <div class='category-nav'><a href="#unemployment">Unemployment</a></div>
+                <div class='category-nav'><a href="#housing">Housing</a></div>
+            </nav>
+
+            <main class='page-main'>
+                <div class='category-section'>
+                    <div class='category-heading' id='business'><h2>Business</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>
+                            <br>
+                            <p>In 2020 Q3, the number of establishments in Pike County was 76270. This is a X% increase in the number of establishments since [1 year ago], when the number was Y.  </p>
+                            <br>
+                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the BLS </p>
+                            <br>
+                            <p class="note">Note: An establishment refer to an economic unit (e.g. farm, mine, factory, or store) that produces goods or provides services, often tied to a single physical location and its predominant economic activity. A large corporation may have multiple establishments in a single county. The number of establishment could serve as a proxy for the number of local businesses. </p>
+                        </div>
+                        <div class='data-viz' id='vis1'>
+                            <script>
+                                var v1Spec = {
+                                    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                    "data": {"url": '/county-data/sample-scc-2020q123-data.csv'},
+                                    "mark": "line",
+                                    "encoding": {
+                                        "x": {"field": "quarter", "type": "nominal"},
+                                        "y": {"field": "qtrly_estabs_count", "type": "quantitative"},
+                                        }
+                                    };
+                                vegaEmbed('#vis1', v1Spec);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class='category-section'>
+                    <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>
+                            <br>
+                            <p>In 2020, the unemployment rate in Pike County was 7.0%. This is a 180% increase compared to a year ago; in 2019, the unemployment rate was 2.5%. </p>
+                            <br>
+                            <p>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the BLS</p>
+                        </div>
+                        <div class='data-viz' id="vis2">
+                            <script>
+                                var v2Spec = {
+                                    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                    "data": {
+                                        "values": [
+                                            {"year": "2019", "unemployment rate": 2.5}, {"year": "2020", "unemployment rate": 7.0}
+                                        ]
+                                    },
+                                    "mark": "point",
+                                    "encoding": {
+                                    "x": {"field": "year", "type": "nominal", "axis": {"labelAngle": 0}},
+                                    "y": {"field": "unemployment rate", "type": "quantitative"}
+                                    }   
+                                    }
+                                vegaEmbed('#vis2', v2Spec);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class='category-section'>
+                    <div class='category-heading' id='housing'><h2>Housing</h2></div>
+                    <div class='category-container'>
+                        <div class='data-descript'>
+                            <br>
+                            <p>Description to come</p>
+                        </div>
+                        <div class='data-viz'>
+                            <br>
+                            <p>Visuzliation to come</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- <aside class='page-sidebar'>
+                Aside
+            </aside> -->
+            <footer class='page-footer'>
+                <p>By Team Econ-n-metrics </p>
+            </footer>
+        </div>
+    </body>
+</html>
+
