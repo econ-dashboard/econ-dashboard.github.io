@@ -15,6 +15,10 @@ header {
     padding-right: 20px;
 }
 
+.home {
+    padding-right: 80px;
+}
+
 .nav-menu {
     display: flex;
     justify-content: space-between;
@@ -25,7 +29,6 @@ header {
 }
 
 .dropdown {
-    padding-left: 60px;
     padding-right: 80px;
     position: relative;
     display: inline-block;
@@ -45,11 +48,6 @@ header {
     z-index: 1;
 }
 
-a:link {
-    color: black;
-    text-decoration: none;
-}
-
 .dropdown:hover .dropdown-content {
     display: block;
   }
@@ -67,7 +65,7 @@ ul {
 
 .overview-container > h2 {
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     font-size: 1.875em;
 }
 
@@ -79,7 +77,7 @@ ul {
 
 .overview-container > p {
     text-align: right;
-    padding-bottom: 10px;
+    padding-top: 10px;
     font-style: italic;
 }
 
@@ -110,6 +108,19 @@ ul {
 
 .data-viz {
     /* width: 50%; */
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A9A9A9;
+}
+
+a:visited {
+    color: black;
 }
 
 footer {
