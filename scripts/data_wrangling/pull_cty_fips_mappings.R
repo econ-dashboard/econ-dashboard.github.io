@@ -37,9 +37,19 @@ cty_fips_mappings <-
 		area = X3
 	) %>% 
 	mutate(
+		# Replaces odd "County/city" nomenclature with just "county"
+		area = str_replace(area, "County/city", "County"),
 		# Extracts the county name and state abbreviation from the area.
-		county = str_extract(area, ".*(?=,)"),
-		state = str_extract(area, "(?<=,\\s).*"),
+		county = ifelse(
+			area == "District of Columbia",
+			"District of Columbia",
+			str_extract(area, ".*(?=,)")
+		),
+		state = ifelse(
+			county == "District of Columbia",
+			"DC",
+			str_extract(area, "(?<=,\\s).*")
+		),
 		# Constructs the 5 digit county-specific FIPS codes.
 		fips_code = str_c(state_fips, cty_fips),
 		area_formatted = 

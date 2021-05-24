@@ -902,8 +902,8 @@
         "county_page_url": "/county-pages/san-diego-county-ca-06073.html"
       },
       {
-        "area": "San Francisco County/city, CA",
-        "county_page_url": "/county-pages/san-francisco-county-city-ca-06075.html"
+        "area": "San Francisco County, CA",
+        "county_page_url": "/county-pages/san-francisco-county-ca-06075.html"
       },
       {
         "area": "San Joaquin County, CA",
@@ -1016,8 +1016,8 @@
         "county_page_url": "/county-pages/boulder-county-co-08013.html"
       },
       {
-        "area": "Broomfield County/city, CO",
-        "county_page_url": "/county-pages/broomfield-county-city-co-08014.html"
+        "area": "Broomfield County, CO",
+        "county_page_url": "/county-pages/broomfield-county-co-08014.html"
       },
       {
         "area": "Chaffee County, CO",
@@ -1052,8 +1052,8 @@
         "county_page_url": "/county-pages/delta-county-co-08029.html"
       },
       {
-        "area": "Denver County/city, CO",
-        "county_page_url": "/county-pages/denver-county-city-co-08031.html"
+        "area": "Denver County, CO",
+        "county_page_url": "/county-pages/denver-county-co-08031.html"
       },
       {
         "area": "Dolores County, CO",
@@ -1292,7 +1292,7 @@
         "county_page_url": "/county-pages/sussex-county-de-10005.html"
       }
     ],
-    "NA": [
+    "DC": [
       {
         "area": "District of Columbia",
         "county_page_url": "/county-pages/district-of-columbia-11001.html"
@@ -2212,8 +2212,8 @@
         "county_page_url": "/county-pages/hawaii-county-hi-15001.html"
       },
       {
-        "area": "Honolulu County/city, HI",
-        "county_page_url": "/county-pages/honolulu-county-city-hi-15003.html"
+        "area": "Honolulu County, HI",
+        "county_page_url": "/county-pages/honolulu-county-hi-15003.html"
       },
       {
         "area": "Kauai County, HI",
@@ -9250,8 +9250,8 @@
         "county_page_url": "/county-pages/perry-county-pa-42099.html"
       },
       {
-        "area": "Philadelphia County/city, PA",
-        "county_page_url": "/county-pages/philadelphia-county-city-pa-42101.html"
+        "area": "Philadelphia County, PA",
+        "county_page_url": "/county-pages/philadelphia-county-pa-42101.html"
       },
       {
         "area": "Pike County, PA",
