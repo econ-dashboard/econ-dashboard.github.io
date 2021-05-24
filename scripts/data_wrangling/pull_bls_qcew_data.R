@@ -66,6 +66,7 @@ for (period in available_periods) {
 	data_bls <-
 		data_path %>% 
 		read_csv(col_types = cols()) %>% 
+		filter(own_code == 0) %>% 
 		transmute(
 			fips_code = area_fips,
 			period = str_c(year, "-", qtr),
