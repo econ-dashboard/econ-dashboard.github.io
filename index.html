@@ -4,16 +4,20 @@
     <meta charset="UTF-8 /" />
     <title>Econ dashboard landing page</title>
     <link rel="stylesheet" href="static/css/landing-style.css" />
-    <!-- <script src="static/js/home.js"> </script> -->
   </head>
 
   <body onload="loadJSON ()">
     <div class="page-container">
       <header class="page-header">
-        <h1>Local Economy Indicator Dashboard</h1>
-        <h2> Click on a state from the list below to navigate to your county. </h2>
+        <h1>Local Economy Hub</h1>
+        <p>
+        Welcome to the Local Economy Hub, a dashboard with relevant economic and business data for local reporters. 
+        <br><br>
+        Click on a state from the list below to navigate to the county of your interest.
+        </p>
       </header>
     </div>
+
     <div class="search-container">
       <div class="search-content">
         <ul>
@@ -77,19 +81,6 @@
           let json = await response.json();
           let allStates = json[0];
 
-          //At this point the JSON has been fetched and deserialized to
-          // a JS object, as can be seen from the console if you load
-          // this in the browser.
-          // NOTE: You'll need to do something with the JSON at this point, e.g.
-          // write the data values into hidden <li> tags inside each state
-          // (with a class that allows you to use CSS to set the display so that they do not appear.
-          // Downstream, in your click handler, the job will be to select
-          // all the counties when a state is clicked and toggle their visibility.
-          // console.log(allStates);
-
-          // console.log(json[0].AK[0].area)
-
-
           for (singleState in allStates) {
             if (["PR"].includes(singleState)) {
               continue;
@@ -116,40 +107,14 @@
           }
         }
 
-
-            // of !! look up 
-            // take the postal; look up corresponding value in JSON; 
-            //
-
-
-            // For state in json,
-            // 1) Look up the data values in the json (e.g. json[statePostal])
-            // 2) Using the county data, construct a new unordered list for the state's counties
-            // 3) Locate the li for the given state (this is hard-coded into page already)
-            // 4) Insert the newly created unordered list of counties into the DOM (i.e. append 
-            //   to the li for the state)
-
-        // NOTE: You'll need to select all buttons to add the click handler,
-        // (document.querySelector will only return the first button that is found)
-
         var stateList = document.querySelectorAll(".stateClass");
-        //var countyList = document.querySelectorAll(".countyClass");
-
 
         for (let stateNode of stateList) {
           stateNode.addEventListener("click", (event) => {
-        //   // NOTE: Determine which state has been clicked
-        //   // and toggle the visibility of the state's counties
-        //   // See example of how to toggle at below URL
-        //   // https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#examples
-          let state = event.target.dataset.state;
-        //   // Something like below selector should work for toggling visibility
-        //   // Below won't work until you've completed the process of writing the nested county lists
-        //   // inside of the li for each state.
-              event.target.querySelector('ul').classList.toggle('hidden');
-        //   // Select the list of counties
-          console.log(`Hide/show elements for ${state}`);
-           });
+            let state = event.target.dataset.state;
+            event.target.querySelector('ul').classList.toggle('hidden');
+            console.log(`Hide/show elements for ${state}`);
+          });
         };
 
       </script>
@@ -168,5 +133,10 @@
 
       </div>
     </div>
+
+    <footer class='page-footer'>
+      <p>By Team Econ-n-metrics </p>
+  </footer>
+
   </body>
 </html>

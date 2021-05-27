@@ -84,8 +84,8 @@ ul {
 .category-section {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px grey solid;
+    padding: 30px 100px 50px 100px;
+    border-bottom: 1px #DCDCDC solid;
 }
 
 .category-heading {

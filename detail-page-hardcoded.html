@@ -17,7 +17,7 @@
 
             <header class='page-header'>
                 <ul class="home">
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                 </ul>
                 <ul class='county-name-class'>
                     <li class='county-name'>{County name, State code}</li>
@@ -70,13 +70,22 @@
                         <script>
                             var v1Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "title": "Number of Businesses",
+                                "data": {"url": 'county-data/counties/06085/bls_data_06085.csv'},
                                 "mark": "line",
                                 "encoding": {
-                                    "x": {"field": "period", "type": "nominal"},
-                                    "y": {"field": "qtrly_estabs", "type": "quantitative"},
-                                    }
-                                };
+                                    "x": {
+                                        "field": "period", 
+                                        "type": "nominal",
+                                        "title": "Year and Quarter"
+                                    },
+                                    "y": {
+                                        "field": "qtrly_estabs", 
+                                        "type": "quantitative",
+                                        "title": "Count"
+                                    },
+                                }
+                            };
                             vegaEmbed('#vis1', v1Spec);
                         </script>
                     </div>
@@ -96,39 +105,50 @@
                             var v2Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
                                 "title": "Unemployment Rate",
-                                "data": {"url": '/county-data/counties/{{06085}}/lau_data_{{06085}}.csv'},
-                                "mark": {
-                                    "type" :"line"
-                                },
-                                "encoding": {
-                                    "x": {
-                                        "field": "year", 
-                                        "timeUnit": "year", 
-                                        "type": "ordinal",
-                                        "title": "Year",
+                                "data": {"url": '/county-data/counties/06085/lau_data_06085.csv'},
+                                "layer": [
+                                    {
+                                        "encoding": {
+                                            "x": {"field": "year", "timeUnit": "year", "type": "ordinal", "title": "Year"},
+                                            "y": {"field": "unemployment_rate", "type": "quantitative", "title": "Unemployment rate (%)"}
+                                        },
+                                        "layer": [
+                                            {"mark": "line"},
+                                            {
+                                                "params": [{
+                                                    "name": "label",
+                                                    "select": {"type": "point", "encodings": ["x"], "nearest": true, "on": "mouseover"}
+                                                }],
+                                                "mark": "point",
+                                                "encoding": {
+                                                    "opacity": {
+                                                        "condition": {
+                                                            "param": "label",
+                                                            "empty": false,
+                                                            "value": 1
+                                                        },
+                                                        "value": 0   
+                                                    }
+                                                }
+                                            }
+                                        ] 
                                     },
-                                    "y": {
-                                        "field": "unemployment_rate", 
-                                        "type": "quantitative",
-                                        "title": "Unemployment rate",
+                                    {
+                                        "transform": [{"filiter": "params": "label"}],
+                                        "layer": [
+                                            {
+                                                "mark": {"type": "rule"},
+                                                "encoding": {
+                                                    "x": {"field": "year", "timeUnit": "year", "type": "ordinal", "title": "Year"}
+                                                }
+                                            },
+                                            
+                                        ]
                                     }
-                                }  
+                            ]
                                 
-                            //     "layer": [{}
 
-                            // }]
 
-                                
-                                
-                                // "params": [{
-                                //     "name": "pts",
-                                //     "select": {
-                                //         "type": "point",
-                                //         "encodings": ["y"], 
-                                //         "on": "mousemove",
-                                //         "nearest": true
-                                //     }
-                                // }],
                             }
                             vegaEmbed('#vis2', v2Spec);
                         </script>
@@ -148,13 +168,22 @@
                         <script>
                             var v3Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "title": "Average Weekly Wage",
+                                "data": {"url": 'county-data/counties/06085/bls_data_06085.csv'},
                                 "mark": "line",
                                 "encoding": {
-                                    "x": {"field": "period", "type": "nominal"},
-                                    "y": {"field": "avg_wkly_wage", "type": "quantitative"},
-                                    }
-                                };
+                                    "x": {
+                                        "field": "period", 
+                                        "type": "nominal",
+                                        "title": "Year and Quarter"
+                                    },
+                                    "y": {
+                                        "field": "avg_wkly_wage", 
+                                        "type": "quantitative",
+                                        "title": "$"
+                                    },
+                                }
+                            };
                             vegaEmbed('#vis3', v3Spec);
                         </script>
    
