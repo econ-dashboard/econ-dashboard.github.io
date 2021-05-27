@@ -4,7 +4,7 @@
     <head>
         <meta charset='UTF-8 /'>
         <title> Econ dashboard detail page </title>
-        <link rel='stylesheet' href='../detail-style.css' />
+        <link rel='stylesheet' href='/static/css/detail-style.css' />
 
         <!-- vega embed-->
         <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
@@ -16,98 +16,154 @@
         <div class='page-container'>
 
             <header class='page-header'>
-                <div class='home-button'><a href="">Home</a></div>
-                <div class='county-name'><h1>Waldo County, ME</h1></div>
+                <ul class="home">
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <ul class='county-name-class'>
+                    <li class='county-name'>Waldo County, ME</li>
+                </ul>
+                <ul class='nav-menu'>
+                    <li class='dropdown'><span>Sections</span>
+                        <ul class='dropdown-content'>
+                            <li><a href="#business">Business</a></li>
+                            <li><a href="#employment">Unemployment</a></li>
+                            <li><a href="#wage">Wage</a></li>
+                        </ul>
+                </ul>
             </header>
-
-            <div class='overview'> 
-                Placeholder: Most up-to-date overview statistics
-            </div>
-
-            <nav class='page-nav'>
-                <div class='category-nav'><a href="#business">Business</a></div>
-                <div class='category-nav'><a href="#unemployment">Unemployment</a></div>
-                <div class='category-nav'><a href="#housing">Housing</a></div>
-            </nav>
-
+            
             <main class='page-main'>
-                <div class='category-section'>
-                    <div class='category-heading' id='business'><h2>Business</h2></div>
-                    <div class='category-container'>
-                        <div class='data-descript'>
-                            <br>
-                            <p>In 2020 Q3, the number of establishments in Waldo County was 76270. This is a X% increase in the number of establishments since [1 year ago], when the number was Y.  </p>
-                            <br>
-                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the BLS </p>
-                            <br>
-                            <p class="note">Note: An establishment refer to an economic unit (e.g. farm, mine, factory, or store) that produces goods or provides services, often tied to a single physical location and its predominant economic activity. A large corporation may have multiple establishments in a single county. The number of establishment could serve as a proxy for the number of local businesses. </p>
+                <div class='overview-container'> 
+                    <h2>Up-to-date Overview Statistics</h2>
+                    <div class='overview-stat-container'>
+                        <div class='biz-stat'>
+                            <h3>Number of businesses:</h3>
+                            <h4>1,212</h4> 
+                            <p>as of 2020 Q3</p>                       
                         </div>
-                        <div class='data-viz' id='vis1'>
-                            <script>
-                                var v1Spec = {
-                                    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-                                    "data": {"url": '/county-data/sample-scc-2020q123-data.csv'},
-                                    "mark": "line",
-                                    "encoding": {
-                                        "x": {"field": "quarter", "type": "nominal"},
-                                        "y": {"field": "qtrly_estabs_count", "type": "quantitative"},
-                                        }
-                                    };
-                                vegaEmbed('#vis1', v1Spec);
-                            </script>
+                        <div class='unemployment-stat'>
+                            <h3>Unemployment rate:</h3>
+                            <h4>5.20%</h4>
+                            <p>as of 2020</p> 
+                        </div>
+                        <div class='avg-wage'>
+                            <h3>Average weekly wage:</h3>
+                            <h4>$839</h4> 
+                            <p>as of 2020 Q3</p> 
                         </div>
                     </div>
+                    <p>updated on: 2021-05-27</p>
                 </div>
                 <div class='category-section'>
-                    <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
-                    <div class='category-container'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='business'><h2>Business</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In 2020, the unemployment rate in Waldo County was 7.0%. This is a 180% increase compared to a year ago; in 2019, the unemployment rate was 2.5%. </p>
+                            <p> In 2020 Q3, the number of businesses in Waldo County, ME was 1,212. This is a -0.165% change since 2020 Q2, when it was 1,214. </p>
                             <br>
-                            <p>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the BLS</p>
+                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
+                            <br>
+                            <p class="note">Note: BLS counts the number of "establishments," as defined as an economic unit that produces goods or services, often tied to a single location/activity within a region. This could serve as a proxy for the number of local businesses.</p>
                         </div>
-                        <div class='data-viz' id="vis2">
-                            <script>
-                                var v2Spec = {
-                                    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-                                    "data": {
-                                        "values": [
-                                            {"year": "2019", "unemployment rate": 2.5}, {"year": "2020", "unemployment rate": 7.0}
-                                        ]
-                                    },
-                                    "mark": "point",
-                                    "encoding": {
-                                    "x": {"field": "year", "type": "nominal", "axis": {"labelAngle": 0}},
-                                    "y": {"field": "unemployment rate", "type": "quantitative"}
-                                    }   
+                    </div>
+                    <div class='data-viz' id='vis1'>
+                        <script>
+                            var v1Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "data": {"url": '/county-data/counties/23027/bls_data_23027.csv'},
+                                "mark": "line",
+                                "encoding": {
+                                    "x": {"field": "period", "type": "nominal"},
+                                    "y": {"field": "qtrly_estabs", "type": "quantitative"},
                                     }
-                                vegaEmbed('#vis2', v2Spec);
-                            </script>
-                        </div>
+                                };
+                            vegaEmbed('#vis1', v1Spec);
+                        </script>
                     </div>
                 </div>
                 <div class='category-section'>
-                    <div class='category-heading' id='housing'><h2>Housing</h2></div>
-                    <div class='category-container'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>Description to come</p>
-                        </div>
-                        <div class='data-viz'>
+                            <p>In 2020, the unemployment rate in Waldo County, ME was 5.20%. This is a 79.3% change since 2019, when it was 2.90%.</p>
                             <br>
-                            <p>Visuzliation to come</p>
+                            <p class='source'>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
+                    </div>
+                    <div class='data-viz' id="vis2">
+                        <script>
+                            var v2Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "title": "Unemployment Rate",
+                                "data": {"url": '/county-data/counties/23027/lau_data_23027.csv'},
+                                "mark": {
+                                    "type" :"line"
+                                },
+                                "encoding": {
+                                    "x": {
+                                        "field": "year", 
+                                        "timeUnit": "year", 
+                                        "type": "ordinal",
+                                        "title": "Year",
+                                    },
+                                    "y": {
+                                        "field": "unemployment_rate", 
+                                        "type": "quantitative",
+                                        "title": "Unemployment rate",
+                                    }
+                                }  
+                                
+                            //     "layer": [{}
+
+                            // }]
+
+                                
+                                
+                                // "params": [{
+                                //     "name": "pts",
+                                //     "select": {
+                                //         "type": "point",
+                                //         "encodings": ["y"], 
+                                //         "on": "mousemove",
+                                //         "nearest": true
+                                //     }
+                                // }],
+                            }
+                            vegaEmbed('#vis2', v2Spec);
+                        </script>
+                    </div>
+                </div>
+                <div class='category-section'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
+                        <div class='data-descript'>
+                            <br>
+                            <p>In 2020 Q3, the average weekly wage in Waldo County, ME was $839. This is a -3.56% change since 2020 Q2, when it was $870.</p>
+                            <br>
+                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
+                        </div>
+                    </div>
+                    <div class='data-viz' id="vis3">
+                        <script>
+                            var v3Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "data": {"url": '/county-data/counties/23027/bls_data_23027.csv'},
+                                "mark": "line",
+                                "encoding": {
+                                    "x": {"field": "period", "type": "nominal"},
+                                    "y": {"field": "avg_wkly_wage", "type": "quantitative"},
+                                    }
+                                };
+                            vegaEmbed('#vis3', v3Spec);
+                        </script>
+   
                     </div>
                 </div>
             </main>
-            <!-- <aside class='page-sidebar'>
-                Aside
-            </aside> -->
             <footer class='page-footer'>
                 <p>By Team Econ-n-metrics </p>
             </footer>
         </div>
     </body>
 </html>
-

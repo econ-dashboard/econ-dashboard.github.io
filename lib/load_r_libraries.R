@@ -19,6 +19,7 @@ our_packages <-
 		"jsonlite",
 		"openxlsx",
 		"lubridate",
+		"scales",
 		"tidyverse"
 	)
 
