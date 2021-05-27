@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset='UTF-8 /'>
+        <title> Econ dashboard detail page </title>
+        <link rel='stylesheet' href='/static/css/detail-style.css' />
+
+        <!-- vega embed-->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    </head>
+
+    <body>
+        <div class='page-container'>
+
+            <header class='page-header'>
+                <ul class="home">
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <ul class='county-name-class'>
+                    <li class='county-name'>{{area_name}}</li>
+                </ul>
+                <ul class='nav-menu'>
+                    <li class='dropdown'><span>Sections</span>
+                        <ul class='dropdown-content'>
+                            <li><a href="#business">Business</a></li>
+                            <li><a href="#employment">Unemployment</a></li>
+                            <li><a href="#wage">Wage</a></li>
+                        </ul>
+                </ul>
+            </header>
+            
+            <main class='page-main'>
+                <div class='overview-container'> 
+                    <h2>Up-to-date Overview Statistics</h2>
+                    <div class='overview-stat-container'>
+                        <div class='biz-stat'>
+                            <h3>Number of businesses:</h3>
+                            <h4>{{qtrly_estabs}}</h4> 
+                            <p>as of {{bls_date}}</p>                       
+                        </div>
+                        <div class='unemployment-stat'>
+                            <h3>Unemployment rate:</h3>
+                            <h4>{{unemployment_rate}}</h4>
+                            <p>as of {{unemployment_rate_date}}</p> 
+                        </div>
+                        <div class='avg-wage'>
+                            <h3>Average weekly wage:</h3>
+                            <h4>{{avg_wkly_wage}}</h4> 
+                            <p>as of {{bls_date}}</p> 
+                        </div>
+                    </div>
+                    <p>updated on: {{data_pull_date}}</p>
+                </div>
+                <div class='category-section'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='business'><h2>Business</h2></div>
+                        <div class='data-descript'>
+                            <br>
+                            <p> In {{bls_date}}, the number of businesses in {{area_name}} was {{qtrly_estabs}}. This is a {{qtrly_estabs_pct_change}} change since {{bls_prev_date}}, when it was {{qtrly_estabs_last_period}}. </p>
+                            <br>
+                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
+                            <br>
+                            <p class="note">Note: BLS counts the number of "establishments," as defined as an economic unit that produces goods or services, often tied to a single location/activity within a region. This could serve as a proxy for the number of local businesses.</p>
+                        </div>
+                    </div>
+                    <div class='data-viz' id='vis1'>
+                        <script>
+                            var v1Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
+                                "mark": "line",
+                                "encoding": {
+                                    "x": {"field": "period", "type": "nominal"},
+                                    "y": {"field": "qtrly_estabs", "type": "quantitative"},
+                                    }
+                                };
+                            vegaEmbed('#vis1', v1Spec);
+                        </script>
+                    </div>
+                </div>
+                <div class='category-section'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
+                        <div class='data-descript'>
+                            <br>
+                            <p>In {{unemployment_rate_date}}, the unemployment rate in {{area_name}} was {{unemployment_rate}}. This is a {{unemployment_rate_pct_change}} change since {{unemployment_rate_prev_date}}, when it was {{unemployment_rate_last_period}}.</p>
+                            <br>
+                            <p class='source'>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the U.S. Bureau of Labor Statistics</p>
+                        </div>
+                    </div>
+                    <div class='data-viz' id="vis2">
+                        <script>
+                            var v2Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "title": "Unemployment Rate",
+                                "data": {"url": '/county-data/counties/{{fips}}/lau_data_{{fips}}.csv'},
+                                "mark": {
+                                    "type" :"line"
+                                },
+                                "encoding": {
+                                    "x": {
+                                        "field": "year", 
+                                        "timeUnit": "year", 
+                                        "type": "ordinal",
+                                        "title": "Year",
+                                    },
+                                    "y": {
+                                        "field": "unemployment_rate", 
+                                        "type": "quantitative",
+                                        "title": "Unemployment rate",
+                                    }
+                                }  
+                                
+                            //     "layer": [{}
+
+                            // }]
+
+                                
+                                
+                                // "params": [{
+                                //     "name": "pts",
+                                //     "select": {
+                                //         "type": "point",
+                                //         "encodings": ["y"], 
+                                //         "on": "mousemove",
+                                //         "nearest": true
+                                //     }
+                                // }],
+                            }
+                            vegaEmbed('#vis2', v2Spec);
+                        </script>
+                    </div>
+                </div>
+                <div class='category-section'>
+                    <div class='text-container'>
+                        <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
+                        <div class='data-descript'>
+                            <br>
+                            <p>In {{bls_date}}, the average weekly wage in {{area_name}} was {{avg_wkly_wage}}. This is a {{avg_wkly_wage_pct_change}} change since {{bls_prev_date}}, when it was {{avg_wkly_wage_last_period}}.</p>
+                            <br>
+                            <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
+                        </div>
+                    </div>
+                    <div class='data-viz' id="vis3">
+                        <script>
+                            var v3Spec = {
+                                $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
+                                "mark": "line",
+                                "encoding": {
+                                    "x": {"field": "period", "type": "nominal"},
+                                    "y": {"field": "avg_wkly_wage", "type": "quantitative"},
+                                    }
+                                };
+                            vegaEmbed('#vis3', v3Spec);
+                        </script>
+   
+                    </div>
+                </div>
+            </main>
+            <footer class='page-footer'>
+                <p>By Team Econ-n-metrics </p>
+            </footer>
+        </div>
+    </body>
+</html>
