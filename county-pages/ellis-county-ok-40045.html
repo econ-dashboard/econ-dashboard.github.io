@@ -16,30 +16,31 @@
         <div class='page-container'>
 
             <header class='page-header'>
-                <ul class="home">
-                    <li><a href="../index.html">Home</a></li>
-                </ul>
                 <ul class='county-name-class'>
-                    <li class='county-name'>Ellis County, OK</li>
+                    <li class='county-name'><h1>Ellis County, OK</h1></li>
                 </ul>
-                <ul class='nav-menu'>
-                    <li class='dropdown'><span>Sections</span>
-                        <ul class='dropdown-content'>
-                            <li><a href="#business">Business</a></li>
-                            <li><a href="#employment">Unemployment</a></li>
-                            <li><a href="#wage">Wage</a></li>
-                        </ul>
-                </ul>
+                <div class="header-right">
+                    <ul class="home">
+                        <li><a href="../index.html">Home</a></li>
+                    </ul>
+                    <ul class='nav-menu'>
+                        <li class='dropdown'><span>Sections</span>
+                            <ul class='dropdown-content'>
+                                <li><a href="#business">Business</a></li>
+                                <li><a href="#employment">Unemployment</a></li>
+                                <li><a href="#wage">Wage</a></li>
+                            </ul>
+                    </ul>
+                </div>
             </header>
             
             <main class='page-main'>
                 <div class='overview-container'> 
-                    <h2>Up-to-date Overview Statistics</h2>
                     <div class='overview-stat-container'>
                         <div class='biz-stat'>
                             <h3>Number of businesses:</h3>
                             <h4>136</h4> 
-                            <p>as of 2020 Q3</p>                       
+                            <p>as of third quarter 2020</p>                       
                         </div>
                         <div class='unemployment-stat'>
                             <h3>Unemployment rate:</h3>
@@ -47,19 +48,19 @@
                             <p>as of 2020</p> 
                         </div>
                         <div class='avg-wage'>
-                            <h3>Average weekly wage:</h3>
+                            <h3>Average wage:</h3>
                             <h4>$726</h4> 
-                            <p>as of 2020 Q3</p> 
+                            <p>as of third quarter 2020</p> 
                         </div>
                     </div>
-                    <p>updated on: 2021-05-27</p>
+                    <p>updated on: 2021-06-01</p>
                 </div>
                 <div class='category-section'>
                     <div class='text-container'>
                         <div class='category-heading' id='business'><h2>Business</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p> In 2020 Q3, the number of businesses in Ellis County, OK was 136. This is a -0.730% change since 2020 Q2, when it was 137. </p>
+                            <p> In the third quarter of 2020, the number of businesses in Ellis County, OK was 136. This is a change of -0.730% since the prior quarter, when the number was 137. </p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                             <br>
@@ -70,13 +71,59 @@
                         <script>
                             var v1Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "width": 600,
+                                "height": 300,
+                                "title": "Number of Businesses",
                                 "data": {"url": '/county-data/counties/40045/bls_data_40045.csv'},
-                                "mark": "line",
-                                "encoding": {
-                                    "x": {"field": "period", "type": "nominal"},
-                                    "y": {"field": "qtrly_estabs", "type": "quantitative"},
+                                "layer": [
+                                    {
+                                        "encoding": {
+                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "y": {"field": "qtrly_estabs", "type": "quantitative", "title": "Count"}
+                                        },
+                                        "layer": [
+                                            {"mark": "line"},
+                                            {
+                                                "params": [{
+                                                    "name": "label",
+                                                    "select": {"type": "point", "encodings": ["x"], "nearest": true, "on": "mouseover"}
+                                                }],
+                                                "mark": "point",
+                                                "encoding": {
+                                                    "opacity": {
+                                                        "condition": {
+                                                            "param": "label",
+                                                            "empty": false,
+                                                            "value": 1
+                                                        },
+                                                        "value": 0   
+                                                    }
+                                                }
+                                            }
+                                        ] 
+                                    },
+                                    {
+                                        "transform": [{"filter": {"param": "label", "empty": false}}],
+                                        "layer": [
+                                                {
+                                                    "encoding": {
+                                                        "text": {"type": "quantitative", "field": "qtrly_estabs"},
+                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "y": {"type": "quantitative", "field": "qtrly_estabs"}
+                                                    },
+                                                    "layer": [
+                                                        {
+                                                            "mark": {
+                                                                "type": "text", 
+                                                                "dy": 20
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                        ]
                                     }
-                                };
+                                ]
+                            };
                             vegaEmbed('#vis1', v1Spec);
                         </script>
                     </div>
@@ -86,7 +133,7 @@
                         <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In 2020, the unemployment rate in Ellis County, OK was 4.50%. This is a 95.7% change since 2019, when it was 2.30%.</p>
+                            <p>In 2020, the unemployment rate in Ellis County, OK was 4.50%. This is a change of 95.7% since one year prior, when the rate was 2.30%.</p>
                             <br>
                             <p class='source'>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -95,40 +142,58 @@
                         <script>
                             var v2Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "width": 600,
+                                "height": 300,
                                 "title": "Unemployment Rate",
                                 "data": {"url": '/county-data/counties/40045/lau_data_40045.csv'},
-                                "mark": {
-                                    "type" :"line"
-                                },
-                                "encoding": {
-                                    "x": {
-                                        "field": "year", 
-                                        "timeUnit": "year", 
-                                        "type": "ordinal",
-                                        "title": "Year",
+                                "layer": [
+                                    {
+                                        "encoding": {
+                                            "x": {"field": "year", "timeUnit": "year", "type": "temporal", "title": "Year"},
+                                            "y": {"field": "unemployment_rate", "type": "quantitative", "title": "Unemployment rate (%)"}
+                                        },
+                                        "layer": [
+                                            {"mark":"line"},
+                                            {
+                                                "params": [{
+                                                    "name": "label",
+                                                    "select": {"type": "point", "encodings": ["x"], "nearest": true, "on": "mouseover"}
+                                                }],
+                                                "mark": "point",
+                                                "encoding": {
+                                                    "opacity": {
+                                                        "condition": {
+                                                            "param": "label",
+                                                            "empty": false,
+                                                            "value": 1
+                                                        },
+                                                        "value": 0   
+                                                    }
+                                                }
+                                            }
+                                        ] 
                                     },
-                                    "y": {
-                                        "field": "unemployment_rate", 
-                                        "type": "quantitative",
-                                        "title": "Unemployment rate",
+                                    {
+                                        "transform": [{"filter": {"param": "label", "empty": false}}],
+                                        "layer": [
+                                                {
+                                                    "encoding": {
+                                                        "text": {"type": "quantitative", "field": "unemployment_rate"},
+                                                        "x": {"type": "temporal", "field": "year"},
+                                                        "y": {"type": "quantitative", "field": "unemployment_rate"}
+                                                    },
+                                                    "layer": [
+                                                        {
+                                                            "mark": {
+                                                                "type": "text", 
+                                                                "dy": 20
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                        ]
                                     }
-                                }  
-                                
-                            //     "layer": [{}
-
-                            // }]
-
-                                
-                                
-                                // "params": [{
-                                //     "name": "pts",
-                                //     "select": {
-                                //         "type": "point",
-                                //         "encodings": ["y"], 
-                                //         "on": "mousemove",
-                                //         "nearest": true
-                                //     }
-                                // }],
+                                ]
                             }
                             vegaEmbed('#vis2', v2Spec);
                         </script>
@@ -139,7 +204,7 @@
                         <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In 2020 Q3, the average weekly wage in Ellis County, OK was $726. This is a -6.56% change since 2020 Q2, when it was $777.</p>
+                            <p>In the third quarter of 2020, the average weekly wage in Ellis County, OK was $726. This is a change of -6.56% since the prior quarter, when the wage was $777.</p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -148,13 +213,59 @@
                         <script>
                             var v3Spec = {
                                 $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                                "width": 600,
+                                "height": 300,
+                                "title": "Average Weekly Wage",
                                 "data": {"url": '/county-data/counties/40045/bls_data_40045.csv'},
-                                "mark": "line",
-                                "encoding": {
-                                    "x": {"field": "period", "type": "nominal"},
-                                    "y": {"field": "avg_wkly_wage", "type": "quantitative"},
+                                "layer": [
+                                    {
+                                        "encoding": {
+                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "y": {"field": "avg_wkly_wage", "type": "quantitative", "title": "$"}
+                                        },
+                                        "layer": [
+                                            {"mark": "line"},
+                                            {
+                                                "params": [{
+                                                    "name": "label",
+                                                    "select": {"type": "point", "encodings": ["x"], "nearest": true, "on": "mouseover"}
+                                                }],
+                                                "mark": "point",
+                                                "encoding": {
+                                                    "opacity": {
+                                                        "condition": {
+                                                            "param": "label",
+                                                            "empty": false,
+                                                            "value": 1
+                                                        },
+                                                        "value": 0   
+                                                    }
+                                                }
+                                            }
+                                        ] 
+                                    },
+                                    {
+                                        "transform": [{"filter": {"param": "label", "empty": false}}],
+                                        "layer": [
+                                                {
+                                                    "encoding": {
+                                                        "text": {"type": "quantitative", "field": "avg_wkly_wage"},
+                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "y": {"type": "quantitative", "field": "avg_wkly_wage"}
+                                                    },
+                                                    "layer": [
+                                                        {
+                                                            "mark": {
+                                                                "type": "text", 
+                                                                "dy": 20
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                        ]
                                     }
-                                };
+                                ]
+                            }
                             vegaEmbed('#vis3', v3Spec);
                         </script>
    
@@ -162,7 +273,7 @@
                 </div>
             </main>
             <footer class='page-footer'>
-                <p>By Team Econ-n-metrics </p>
+                <p>By Rachel Oh and Michael Spencer </p>
             </footer>
         </div>
     </body>

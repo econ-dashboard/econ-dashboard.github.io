@@ -16,50 +16,51 @@
         <div class='page-container'>
 
             <header class='page-header'>
-                <ul class="home">
-                    <li><a href="../index.html">Home</a></li>
-                </ul>
                 <ul class='county-name-class'>
-                    <li class='county-name'>{County name, State code}</li>
+                    <li class='county-name'><h1>{{area_name}}</h1></li>
                 </ul>
-                <ul class='nav-menu'>
-                    <li class='dropdown'><span>Sections</span>
-                        <ul class='dropdown-content'>
-                            <li><a href="#business">Business</a></li>
-                            <li><a href="#employment">Unemployment</a></li>
-                            <li><a href="#wage">Wage</a></li>
-                        </ul>
-                </ul>
+                <div class="header-right">
+                    <ul class="home">
+                        <li><a href="../index.html">Home</a></li>
+                    </ul>
+                    <ul class='nav-menu'>
+                        <li class='dropdown'><span>Sections</span>
+                            <ul class='dropdown-content'>
+                                <li><a href="#business">Business</a></li>
+                                <li><a href="#employment">Unemployment</a></li>
+                                <li><a href="#wage">Wage</a></li>
+                            </ul>
+                    </ul>
+                </div>
             </header>
             
             <main class='page-main'>
                 <div class='overview-container'> 
-                    <h2>Up-to-date Overview Statistics</h2>
                     <div class='overview-stat-container'>
                         <div class='biz-stat'>
                             <h3>Number of businesses:</h3>
                             <h4>{{qtrly_estabs}}</h4> 
-                            <p>as of {{date}}</p>                       
+                            <p>as of {{bls_date_quarter}} {{bls_date_year}}</p>                       
                         </div>
                         <div class='unemployment-stat'>
                             <h3>Unemployment rate:</h3>
                             <h4>{{unemployment_rate}}</h4>
-                            <p>as of {{date}}</p> 
+                            <p>as of {{unemployment_rate_date}}</p> 
                         </div>
                         <div class='avg-wage'>
                             <h3>Average wage:</h3>
                             <h4>{{avg_wkly_wage}}</h4> 
-                            <p>as of {{date}}</p> 
+                            <p>as of {{bls_date_quarter}} {{bls_date_year}}</p> 
                         </div>
                     </div>
-                    <p>updated on: {{the date that the data was pulled}}</p>
+                    <p>updated on: {{data_pull_date}}</p>
                 </div>
                 <div class='category-section'>
                     <div class='text-container'>
                         <div class='category-heading' id='business'><h2>Business</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p> In {{most recent year and quarter}}, the number of businesses in {{county name}} was {{}}. This is a {{}}% change since {{1 year ago}}, when it was {{}}. </p>
+                            <p> In the {{bls_date_quarter}} of {{bls_date_year}}, the number of businesses in {{county name}} was {{}}. This is a change of {{qtrly_estabs_pct_change}} since the prior quarter, when the number was {{qtrly_estabs_last_period}}. </p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                             <br>
@@ -73,7 +74,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Number of Businesses",
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -132,7 +133,7 @@
                         <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In {{most recent year}}, the unemployment rate in {{county name}} was {{}}. This is a {{}}% change since {{1 year ago}}, when it was {{}}.</p>
+                            <p>In {{unemployment_rate_date}}, the unemployment rate in {{area_name}} was {{unemployment_rate}}. This is a change of {{unemployment_rate_pct_change}} since one year ago, when the rate was {{unemployment_rate_last_period}}.</p>
                             <br>
                             <p class='source'>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -144,7 +145,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Unemployment Rate",
-                                "data": {"url": '/county-data/counties/{{06085}}/lau_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/lau_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -203,7 +204,7 @@
                         <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In {{most recent year and quarter}}, the average weekly wage in {{county name}} was {{}}. This is a {{}}% change since {{1 year ago}}, when it was {{}}.</p>
+                            <p>In the {{bls_date_quarter}} of {{bls_date_year}}, the average weekly wage in {{area_name}} was {{avg_wkly_wage}}. This is a change of {{avg_wkly_wage_pct_change}} since one year ago, when the wage was {{avg_wkly_wage_last_period}}.</p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -215,7 +216,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Average Weekly Wage",
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -272,7 +273,7 @@
                 </div>
             </main>
             <footer class='page-footer'>
-                <p>By Team Econ-n-metrics </p>
+                <p>By Rachel Oh and Michael Spencer </p>
             </footer>
         </div>
     </body>
