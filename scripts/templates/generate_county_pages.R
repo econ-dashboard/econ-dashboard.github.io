@@ -50,8 +50,8 @@ for (record in 1:nrow(data_county_names)) {
 			data_pull_date = data_pull_date,
 			fips = fips,
 			area_name = data_county_names[record, "area"],
-			bls_date = bls_date,
-			bls_prev_date = bls_prev_date,
+			bls_date_quarter = bls_date_quarter,
+			bls_date_year = bls_date_year,
 			qtrly_estabs = qtrly_estabs %>% pull() %>% number(big.mark = ","),
 			qtrly_estabs_last_period = qtrly_estabs_last_period %>% pull() %>% number(big.mark = ","),
 			qtrly_estabs_pct_change = qtrly_estabs_pct_change %>% pull %>% percent(),
@@ -60,7 +60,6 @@ for (record in 1:nrow(data_county_names)) {
 			avg_wkly_wage_pct_change = avg_wkly_wage_pct_change %>% pull %>% percent(),
 			unemployment_rate = unemployment_rate %>% pull() %>% percent(scale = 1, accuracy = .01),
 			unemployment_rate_date = unemployment_rate_date,
-			unemployment_rate_prev_date = unemployment_rate_prev_date,
 			unemployment_rate_last_period = unemployment_rate_last_period %>% pull() %>% percent(scale = 1, accuracy = .01),
 			unemployment_rate_pct_change = unemployment_rate_pct_change %>% pull %>% percent()
 		)

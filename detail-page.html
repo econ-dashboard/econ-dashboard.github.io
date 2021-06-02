@@ -17,7 +17,7 @@
 
             <header class='page-header'>
                 <ul class='county-name-class'>
-                    <li class='county-name'><h1>{County name, State code}</h1></li>
+                    <li class='county-name'><h1>{{area_name}}</h1></li>
                 </ul>
                 <div class="header-right">
                     <ul class="home">
@@ -40,27 +40,27 @@
                         <div class='biz-stat'>
                             <h4>{{qtrly_estabs}}</h4> 
                             <h3>Number of businesses</h3>
-                            <p>as of {{date}}</p>                       
+                            <p>as of {{bls_date_quarter}} {{bls_date_year}}</p>                       
                         </div>
                         <div class='unemployment-stat'>
                             <h4>{{unemployment_rate}}</h4>
                             <h3>Unemployment rate</h3>
-                            <p>as of {{date}}</p> 
+                            <p>as of {{unemployment_rate_date}}</p> 
                         </div>
                         <div class='avg-wage'>
                             <h4>{{avg_wkly_wage}}</h4> 
                             <h3>Average wage</h3>
-                            <p>as of {{date}}</p> 
+                            <p>as of {{bls_date_quarter}} {{bls_date_year}}</p> 
                         </div>
                     </div>
-                    <p>updated on: {{the date that the data was pulled}}</p>
+                    <p>updated on: {{data_pull_date}}</p>
                 </div>
                 <div class='category-section'>
                     <div class='text-container'>
                         <div class='category-heading' id='business'><h2>Business</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p> In {{most recent year and quarter}}, the number of businesses in {{county name}} was {{}}. This is a change of {{}}% since one year ago, when the number was {{}}. </p>
+                            <p> In the {{bls_date_quarter}} of {{bls_date_year}}, the number of businesses in {{county name}} was {{}}. This is a change of {{qtrly_estabs_pct_change}} since the prior quarter, when the number was {{qtrly_estabs_last_period}}. </p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                             <br>
@@ -74,7 +74,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Number of Businesses",
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -133,7 +133,7 @@
                         <div class='category-heading' id='unemployment'><h2>Unemployment</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In {{most recent year}}, the unemployment rate in {{county name}} was {{}}. This is a change of {{}}% since one year ago, when the rate was {{}}.</p>
+                            <p>In {{unemployment_rate_date}}, the unemployment rate in {{area_name}} was {{unemployment_rate}}. This is a change of {{unemployment_rate_pct_change}} since one year ago, when the rate was {{unemployment_rate_last_period}}.</p>
                             <br>
                             <p class='source'>Source: <a target="_blank" href="https://www.bls.gov/lau/#tables">Local Area Unemployment Statistic</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -145,7 +145,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Unemployment Rate",
-                                "data": {"url": '/county-data/counties/{{06085}}/lau_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/lau_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -204,7 +204,7 @@
                         <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In {{most recent year and quarter}}, the average weekly wage in {{county name}} was {{}}. This is a change of {{}}% since one year ago, when the wage was {{}}.</p>
+                            <p>In the {{bls_date_quarter}} of {{bls_date_year}}, the average weekly wage in {{area_name}} was {{avg_wkly_wage}}. This is a change of {{avg_wkly_wage_pct_change}} since one year ago, when the wage was {{avg_wkly_wage_last_period}}.</p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -216,7 +216,7 @@
                                 "width": 600,
                                 "height": 300,
                                 "title": "Average Weekly Wage",
-                                "data": {"url": 'county-data/counties/{{06085}}/bls_data_{{06085}}.csv'},
+                                "data": {"url": '/county-data/counties/{{fips}}/bls_data_{{fips}}.csv'},
                                 "layer": [
                                     {
                                         "encoding": {
@@ -273,7 +273,7 @@
                 </div>
             </main>
             <footer class='page-footer'>
-                <p>By Rachel Oh, Michael Spencer </p>
+                <p>By Rachel Oh and Michael Spencer </p>
             </footer>
         </div>
     </body>
