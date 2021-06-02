@@ -48,12 +48,12 @@
                             <p>as of 2020</p> 
                         </div>
                         <div class='avg-wage'>
-                            <h4>$803</h4> 
+                            <h4>$784</h4> 
                             <h3>Average wage</h3>
                             <p>as of third quarter 2020</p> 
                         </div>
                     </div>
-                    <p>updated on: 2021-06-02</p>
+                    <p>updated on: 2021-06-03</p>
                 </div>
                 <div class='category-section'>
                     <div class='text-container'>
@@ -78,7 +78,7 @@
                                 "layer": [
                                     {
                                         "encoding": {
-                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "x": {"field": "period", "type": "ordinal", "title": "Year and Quarter", "axis": {"labelAngle": 0, "labelOverlap": true, "grid": true}},
                                             "y": {"field": "qtrly_estabs", "type": "quantitative", "title": "Count"}
                                         },
                                         "layer": [
@@ -108,7 +108,7 @@
                                                 {
                                                     "encoding": {
                                                         "text": {"type": "quantitative", "field": "qtrly_estabs"},
-                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "x": {"type": "ordinal", "field": "period"},
                                                         "y": {"type": "quantitative", "field": "qtrly_estabs"}
                                                     },
                                                     "layer": [
@@ -204,7 +204,7 @@
                         <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In the third quarter of 2020, the average weekly wage in Gallia County, OH was $803. This is a change of 3% since the prior quarter, when the wage was $779.</p>
+                            <p>In the third quarter of 2020, the average weekly wage in Gallia County, OH was $784. This is a change of 1% since the prior quarter, when the wage was $778.</p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -220,7 +220,7 @@
                                 "layer": [
                                     {
                                         "encoding": {
-                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "x": {"field": "period", "type": "ordinal", "title": "Year and Quarter", "axis": {"labelAngle": 0, "labelOverlap": true, "grid": true}},
                                             "y": {"field": "avg_wkly_wage", "type": "quantitative", "title": "$"}
                                         },
                                         "layer": [
@@ -250,7 +250,7 @@
                                                 {
                                                     "encoding": {
                                                         "text": {"type": "quantitative", "field": "avg_wkly_wage"},
-                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "x": {"type": "ordinal", "field": "period"},
                                                         "y": {"type": "quantitative", "field": "avg_wkly_wage"}
                                                     },
                                                     "layer": [

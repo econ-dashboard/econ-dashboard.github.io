@@ -38,7 +38,7 @@
                 <div class='overview-container'> 
                     <div class='overview-stat-container'>
                         <div class='biz-stat'>
-                            <h4>1,204</h4>
+                            <h4>1,203</h4>
                             <h3>Number of businesses</h3> 
                             <p>as of third quarter 2020</p>                       
                         </div>
@@ -53,14 +53,14 @@
                             <p>as of third quarter 2020</p> 
                         </div>
                     </div>
-                    <p>updated on: 2021-06-02</p>
+                    <p>updated on: 2021-06-03</p>
                 </div>
                 <div class='category-section'>
                     <div class='text-container'>
                         <div class='category-heading' id='business'><h2>Business</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p> In the third quarter of 2020, the number of businesses in Phelps County, MO was 1,204. This is a change of 0% since the prior quarter, when the number was 1,200. </p>
+                            <p> In the third quarter of 2020, the number of businesses in Phelps County, MO was 1,203. This is a change of 0% since the prior quarter, when the number was 1,200. </p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                             <br>
@@ -78,7 +78,7 @@
                                 "layer": [
                                     {
                                         "encoding": {
-                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "x": {"field": "period", "type": "ordinal", "title": "Year and Quarter", "axis": {"labelAngle": 0, "labelOverlap": true, "grid": true}},
                                             "y": {"field": "qtrly_estabs", "type": "quantitative", "title": "Count"}
                                         },
                                         "layer": [
@@ -108,7 +108,7 @@
                                                 {
                                                     "encoding": {
                                                         "text": {"type": "quantitative", "field": "qtrly_estabs"},
-                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "x": {"type": "ordinal", "field": "period"},
                                                         "y": {"type": "quantitative", "field": "qtrly_estabs"}
                                                     },
                                                     "layer": [
@@ -204,7 +204,7 @@
                         <div class='category-heading' id='wage'><h2>Average Wage</h2></div>
                         <div class='data-descript'>
                             <br>
-                            <p>In the third quarter of 2020, the average weekly wage in Phelps County, MO was $796. This is a change of -6% since the prior quarter, when the wage was $851.</p>
+                            <p>In the third quarter of 2020, the average weekly wage in Phelps County, MO was $796. This is a change of -6% since the prior quarter, when the wage was $849.</p>
                             <br>
                             <p class="source">Source: <a target="_blank" href="https://www.bls.gov/cew/downloadable-data-files.htm">Quarterly Census of Employment and Wages</a> from the U.S. Bureau of Labor Statistics</p>
                         </div>
@@ -220,7 +220,7 @@
                                 "layer": [
                                     {
                                         "encoding": {
-                                            "x": {"field": "period", "type": "nominal", "title": "Year and Quarter"},
+                                            "x": {"field": "period", "type": "ordinal", "title": "Year and Quarter", "axis": {"labelAngle": 0, "labelOverlap": true, "grid": true}},
                                             "y": {"field": "avg_wkly_wage", "type": "quantitative", "title": "$"}
                                         },
                                         "layer": [
@@ -250,7 +250,7 @@
                                                 {
                                                     "encoding": {
                                                         "text": {"type": "quantitative", "field": "avg_wkly_wage"},
-                                                        "x": {"type": "nominal", "field": "period"},
+                                                        "x": {"type": "ordinal", "field": "period"},
                                                         "y": {"type": "quantitative", "field": "avg_wkly_wage"}
                                                     },
                                                     "layer": [
